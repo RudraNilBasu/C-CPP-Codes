@@ -9,7 +9,7 @@ int main()
     queue<int> q;
     for(i=0;i<100;i++)
     dist[i]=-1;
-    cin>>n>>m;
+    cin>>n>>m;   // n - number of nodes     m - number of edges
     for(i=0;i<m;i++)
     {
         cin>>u>>v;
