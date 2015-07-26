@@ -1,2 +1,2 @@
 # C-CPP-Codes
-Few basic programs in C and C++ on some standard Algorithms
+Few basic programs in C and C++ (as of now) on some standard Algorithms and problems from Competitive Programming websites like Codechef and SPOJ
