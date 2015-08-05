@@ -21,7 +21,7 @@ int bfs(int node) // Will perform BFS and will return the node whose distance is
     dist[node]=0;
     while(!q.empty())
     {
-        int u=q.front();
+        int u=q.front(); // extracting the front element on the queue
         q.pop();
         for(int i=0;i<g[u].size();i++)
         {
