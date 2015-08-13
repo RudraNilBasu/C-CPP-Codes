@@ -18,3 +18,7 @@ int main()
     }
     return 0;
 }
+
+// EXPLANATIONS - A power of 2 Number N can be represented as 100000...000
+// And N-1 will be 01111111...11111
+// Performing Bitwise AND, We Will get the answer = 0 if N is a power of 2
