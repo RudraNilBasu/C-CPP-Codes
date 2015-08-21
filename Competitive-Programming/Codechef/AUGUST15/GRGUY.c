@@ -1,5 +1,5 @@
-//
-//
+//https://www.codechef.com/AUG15/problems/GRGUY
+//https://www.codechef.com/problems/GRGUY
 
 #include<stdio.h>
 #include<string.h>
