@@ -20,7 +20,7 @@ int main()
     q.push(1);//pushing the source which is taken as 1
     while(!q.empty())
     {
-        u=q.front();
+        u=q.front(); // taking the first value from queue
         q.pop();
         for(i=0;i<g[u].size();i++)
         {
