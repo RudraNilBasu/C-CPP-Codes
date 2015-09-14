@@ -21,7 +21,7 @@ int bfs(int n)
 	{
 		current=q.front();
 		q.pop();
-		if(current==0)
+		if(current==0)// backtracking
 		{
 			stack<int> s;
 			while(parent[current])
