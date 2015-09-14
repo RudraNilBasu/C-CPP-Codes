@@ -1,5 +1,15 @@
 //http://www.spoj.com/problems/ONEZERO/
 
+/*
+The basic logic of this code is to first take an initial number (1) in the queue and then For each node, we add 
+two more numbers to the queue, one of which is num*10 and the other is num*10+1, both modulo n (the given input).
+We also keep a track of the parent of each number in the parent[] array, and also the number added after multiplying
+the parent number by 10 in the value[] array.
+The number pushed in the queue is modulo of the input number, and once we find the number we need (it will be 0 as 
+modulo of the number will be =0), we backtrack using the help of the value[] and the parent[] arrays to print the
+required number. For this, we use a stack.
+*/
+
 #include<cstdio>
 #include<stack>
 #include<queue>
