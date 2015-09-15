@@ -7,7 +7,7 @@ We also keep a track of the parent of each number in the parent[] array, and als
 the parent number by 10 in the value[] array.
 The number pushed in the queue is modulo of the input number, and once we find the number we need (it will be 0 as 
 modulo of the number will be =0), we backtrack using the help of the value[] and the parent[] arrays to print the
-required number. For this, we use a stack.
+required number. For this, we use a Stack.
 */
 
 #include<cstdio>
