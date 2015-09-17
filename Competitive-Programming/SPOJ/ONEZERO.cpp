@@ -34,9 +34,11 @@ int bfs(int n)
 		if(current==0)// backtracking using Stack
 		{
 			stack<int> s;
-			while(parent[current])    // parent[current] contains the number (or parent) from where "current" originated
+			while(parent[current])    // parent[current] contains the number (or parent) from where "current" 
+						  //originated
 			{
-				s.push(value[current]);    // value[current] contains the value(x) added after Prevcurrent*10 + x to get the value of "current"
+				s.push(value[current]);    // value[current] contains the value(x) added after 
+							   //Prevcurrent*10 + x to get the value of "current"
 				current=parent[current];
 			}
 			s.push(1);
