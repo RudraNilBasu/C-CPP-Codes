@@ -10,7 +10,7 @@ int dfsnumb=0;
 int DFS(int n,int *d)
 {
     d[n]=dfsnumb;
-    dfsnumb++;
+    dfsnumb++;   // increasing the counter.
     int i;
     for(i=0;i<g[n].size();i++)
     {
