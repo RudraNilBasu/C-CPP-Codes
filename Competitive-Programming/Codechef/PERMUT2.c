@@ -1,4 +1,4 @@
-//https://www.codechef.com/problems/PERMUT2/
+//https://www.codechef.com/problems/PERMUT2/ 
 
 #include<stdio.h>
 int main()
