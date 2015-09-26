@@ -28,7 +28,7 @@ int r,c,count=0,prev=0;
 
 int flood_fill(int i,int j)
 {
-    //Applying Flood fill Algo
+    //Applying Flood fill Algorithm
     if((i>=0)&&(j>=0) && (i<r)&&(j<c))
     {
         if(flag[i][j]==0)
