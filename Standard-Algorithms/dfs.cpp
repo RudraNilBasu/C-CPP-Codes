@@ -5,7 +5,7 @@
 using namespace std;
 
 vector<int> g[100];
-int dfsnumb=0;
+int dfsnumb=0; // counter
 
 int DFS(int n,int *d)
 {
