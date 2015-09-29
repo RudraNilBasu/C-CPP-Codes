@@ -37,7 +37,7 @@ int main()
     while(t--)
     {
         scanf("%s",tree);
-        i=0;
+        i=0;    // initialising i to 0
         ans=btree();
         printf("%d\n",ans);
     }
