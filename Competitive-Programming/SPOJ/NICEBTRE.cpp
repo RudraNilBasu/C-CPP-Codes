@@ -1,3 +1,4 @@
+//http://www.spoj.com/problems/NICEBTRE/
 #include<cstdio>
 #include<iostream>
 #include<algorithm>
