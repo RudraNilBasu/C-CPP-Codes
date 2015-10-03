@@ -1,7 +1,7 @@
 #include<string.h>
 #include<stdlib.h>
 #include<stdio.h>
-#define inpint(x) scanf("%d",&x)
+#define inpd(x) scanf("%d",&x)
 #define inpllu(x) scanf("%llu",&x)
 #define input(x) scanf("%s",x)
 #define RUNBF(i,a,b) for(i=a;i<b;i++)
