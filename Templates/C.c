@@ -3,6 +3,8 @@
 #include<stdio.h>
 #define inpd(x) scanf("%d",&x)
 #define inpllu(x) scanf("%llu",&x)
+#define inplld(x) scanf("%lld",&x)
+#define inpld(x) scanf("%ld",&x)
 #define input(x) scanf("%s",x)
 #define RUNBF(i,a,b) for(i=a;i<b;i++)
 #define RUN(i,a,b) for(i=a;i<=b;i++)
