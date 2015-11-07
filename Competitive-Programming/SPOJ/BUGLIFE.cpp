@@ -14,7 +14,7 @@ using namespace std;
 
 
 int gender[2001]; // to mark the gender of a bug. Gender of bug 'x' is gender[x]
-int flag=0;     // to check whether the answer is correct or not. if flag==1 then ans is wrong
+int flag=0;     // to check whether the answer is correct or not. if flag==1 then ans is wrong, else correct
 
 int isBipartite(int src,vector<int> (&g)[2001])
 {
