@@ -2,7 +2,7 @@
 /*
 Solution of BUGLIFE Problem from SPOJ (http://www.spoj.com/problems/BUGLIFE/)
 Main algorithm - BFS with implementation of checking Bipartite graph (http://www.geeksforgeeks.org/bipartite-graph/)
-Done by - Rudra Nil Basu
+Done by :- Rudra Nil Basu
 */
 
 #include<stdio.h>
