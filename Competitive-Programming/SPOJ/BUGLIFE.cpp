@@ -39,7 +39,7 @@ int isBipartite(int src,vector<int> (&g)[2001])
             }
         }
     }
-    return 0;
+    return 0; // if successfully executed
 }
 
 int main()
