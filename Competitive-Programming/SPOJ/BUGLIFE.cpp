@@ -29,7 +29,7 @@ int isBipartite(int src,vector<int> (&g)[2001])
         {
             if(gender[g[u][i]]==-1)
             {
-                gender[g[u][i]]=1-gender[u];
+                gender[g[u][i]]=1-gender[u]; // marking the gender[] of the Bug
                 q.push(g[u][i]);
             }
             else if(gender[g[u][i]]!=-1 && gender[g[u][i]]==gender[u])
