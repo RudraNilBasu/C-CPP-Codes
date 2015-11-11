@@ -54,7 +54,7 @@ int main()
         flag=0;
         for(i=0;i<2001;i++)
         {
-            gender[i]=-1;
+            gender[i]=-1; // resetting
         }
         vector<int>g[2001];
         scanf("%d",&bug);//input the no of bugs
