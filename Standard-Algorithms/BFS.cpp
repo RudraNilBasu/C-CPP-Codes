@@ -12,7 +12,7 @@ int main()
     cin>>n>>m;   // n - number of nodes     m - number of edges
     for(i=0;i<m;i++)
     {
-        cin>>u>>v;
+        cin>>u>>v; // taking input
         g[u].push_back(v);
         g[v].push_back(u);
     }
