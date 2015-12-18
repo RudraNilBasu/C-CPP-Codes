@@ -27,7 +27,7 @@ int isBipartite(int src,vector<int> (&g)[2001])
         q.pop();
         for(int i=0;i<g[u].size();i++)
         {
-            if(gender[g[u][i]]==-1)
+            if(gender[g[u][i]]==-1) // ignoring if the bug is alreay visited
             {
                 gender[g[u][i]]=1-gender[u]; // marking the gender[] of the Bug
                 q.push(g[u][i]);
