@@ -50,22 +50,6 @@ int flood_fill(int i,int j)
         }
     }
 }
-//This method is only for testing purpose
-/*
-int pa()
-{
-    int i,j;
-    printf("\n");
-    for(i=0;i<r;i++)
-    {
-        for(j=0;j<c;j++)
-        {
-            printf("%d ",flag[i][j]);
-        }
-        printf("\n");
-    }
-}
-*/
 
 int main()
 {
