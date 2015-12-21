@@ -67,7 +67,6 @@ int main()
             if(flag[i][j]==0)
             {
                 //call Flood Fill
-                //count++;
                 count=prev+1;
                 //printf("count is %d\n",count);
                 flood_fill(i,j);
