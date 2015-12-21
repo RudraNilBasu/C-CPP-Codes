@@ -19,7 +19,7 @@ int flag=0;     // to check whether the answer is correct or not. if flag==1 the
 int isBipartite(int src,vector<int> (&g)[2001])
 {
     gender[src]=1;//marking source vertex as 1
-    queue<int>q;
+    queue<int>q; // queue for tracing the current node
     q.push(src);
     while(!q.empty()) // BFS traversal
     {
