@@ -23,7 +23,7 @@ int isBipartite(int src,vector<int> (&g)[2001])
     q.push(src);
     while(!q.empty()) // BFS traversal
     {
-        int u=q.front();
+        int u=q.front(); // The First entry in the queue
         q.pop();
         for(int i=0;i<g[u].size();i++)
         {
