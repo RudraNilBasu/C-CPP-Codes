@@ -6,7 +6,7 @@ using namespace std;
 int a[100];
 int memo[100][100];
 int n;
-int csum(int i,int j)
+int csum(int i,int j) // returns the sum of colors in the index i to j
 {
     int k,sum=0;
     for(k=i;k<=j;k++)
@@ -15,7 +15,7 @@ int csum(int i,int j)
     }
     return sum;
 }
-int mix(int i, int j)
+int mix(int i, int j) // returns the minimum smoke when colors i to j are mixed
 {
     if(memo[i][j]!=INF)
     {
