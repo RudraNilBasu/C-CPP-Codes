@@ -36,7 +36,7 @@ int knapsack(int W,int val[],int wt[],int n)
             }
         }
     }
-    // checking if there are lower cosr (weight) values for same fun value
+    // checking if there are lower cost (weight) values for same fun value
     int ans=wg[n][W];
     for(i=W-1;i>=0;i--)
     {
