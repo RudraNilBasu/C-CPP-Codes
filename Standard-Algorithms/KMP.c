@@ -1,5 +1,5 @@
 /*
-Program to implement KMP Search in a string
+Program to implement KMP algorithm in a string
 */
 #include<stdio.h>
 #include<string.h>
@@ -23,7 +23,7 @@ int search(char txt[], char pat[])
         {
             printf("Found a Match at position %d\n",(i-k));
         }
-        else if((i<N && (pat[k]!=txt[i])))
+        if((i<N && (pat[k]!=txt[i])))
         {
             // if they are not equal
             if(k!=0) // we are not ar the First position of the pat[] array
