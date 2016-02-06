@@ -18,7 +18,7 @@ int updateRangeUtil(int si, int ss, int se, int us,int ue, int diff)
     }
     if (ss>se || ss>ue || se<us)
         return 0;
-    if(ss>=us||se<=ue)
+    if(ss>=us&&se<=ue)
     {
         tree[si]+=(se-ss+1)*diff;
         if(ss!=se)
