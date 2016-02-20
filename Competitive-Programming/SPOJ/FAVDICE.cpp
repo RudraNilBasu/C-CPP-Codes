@@ -1,4 +1,8 @@
 //http://www.spoj.com/problems/FAVDICE/
+/*
+Coupon collector's problem
+ans = n*(1+1/2+1/3.....1/n)
+*/
 #include<stdio.h>
 using namespace std;
 float dice(int n)
