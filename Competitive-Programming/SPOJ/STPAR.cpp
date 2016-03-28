@@ -17,8 +17,6 @@ int main()
         {
             scanf("%d",&a[i]);
             b[i]=a[i];
-            //ms.push(a[i]);
-            //if(min>a[i]) min=a[i];
         }
         reverse(b,b+n);
         sort(a,a+n);
@@ -30,11 +28,10 @@ int main()
         flag=0;
         while(!ms.empty())
         {
-            int s=ms.top();//printf("here %d %d\n",s,a[k]);
+            int s=ms.top();
             if(s==a[k])
             {
-                k++;//printf("hue %d %d\n",s,a[k-1]);
-                //printf("Element going = %d\n",ms.top());
+                k++;
                 ms.pop();
             }
             else
@@ -48,13 +45,12 @@ int main()
                     }
                     else
                     {
-                        ss.push(ms.top());//printf("pushing %d\n",ms.top());
+                        ss.push(ms.top());
                         ms.pop();
                     }
                 }
                 else
                 {
-                    //ss.push(ms.top());
                     ss.push(s);
                     ms.pop();
                 }
@@ -62,7 +58,6 @@ int main()
         }
         while(!ss.empty())
         {
-            //printf("ss top %d a[k]=%d\n",ss.top(),a[k]);
             if(a[k]!=ss.top())
             {
                 flag=1;
