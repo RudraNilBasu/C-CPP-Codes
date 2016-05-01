@@ -2,8 +2,8 @@ import re
 t=input()
 while t>0:
 	x=raw_input()
-	x=x.strip()
-	x=re.sub("\s\s+" , " ", x)
+	x=x.strip() # remove leading and trailing whitespace chars
+	x=re.sub("\s\s+" , " ", x) # remove extra spaces Ex.:-(ab      ab)
 	x=x+" "
 	maxC=0
 	prevlength=0
