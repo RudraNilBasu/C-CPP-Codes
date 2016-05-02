@@ -1,3 +1,4 @@
+// Submit on SPOJ on C++14
 #include<stdio.h>
 #include<string.h>
 #include<limits.h>
@@ -23,7 +24,6 @@ int printRes(int dist[])
 	int count=0,i;
 	for(i=1;i<=n;i++)
 	{
-		printf("%d\t%d\n",i,dist[i]);
 		if(dist[i]<=t) count++;
 	}
 	printf("%d\n",count);
@@ -47,7 +47,6 @@ int dijksktra(int e)
 		{
 			if(!spSet[v] && a[u][v] && dist[u]!=INT_MAX && (dist[u]+a[u][v])<dist[v])
 			{
-				printf("For %d we found %d edge=%d length=%d\n",u,v,a[u][v],(dist[u]+a[u][v]));
 				dist[v]=dist[u]+a[u][v];
 			}
 		}
@@ -57,14 +56,13 @@ int dijksktra(int e)
 int main()
 {
 	int m;
-	//int a[101][101];
 	memset(a,0,sizeof(a));
 	scanf("%d %d %d %d",&n,&e,&t,&m);
 	while(m--)
 	{
 		int i,j,c;
 		scanf("%d %d %d",&i,&j,&c);
-		a[i][j]=c;
+		a[j][i]=c;
 	}
 	dijksktra(e);
 	return 0;
