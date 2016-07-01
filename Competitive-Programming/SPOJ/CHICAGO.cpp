@@ -9,7 +9,7 @@ int ab(int n)
 }
 int n;
 int graph[101][101];
-int kruskal() {
+int floyd() {
 	double dist[n+1][n+1];
 	int i,j,k;
 	for(i=0;i<n+1;i++) {
@@ -53,7 +53,7 @@ int main()
 			graph[a][b]=p;
 			graph[b][a]=p;
 		}
-		kruskal();
+		floyd();
 	}
 	return 0;
 }
