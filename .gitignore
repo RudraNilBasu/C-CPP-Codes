@@ -29,4 +29,7 @@
 *.hex
 
 # Debug files
-*.dSYM/
+*.dSYM
+
+# Files Generated from GEDIT
+*.*~
