@@ -1,126 +1,145 @@
-#include <cstdio>
-#include <vector>
-#include <iostream>
+#include<stdio.h>
+#include<vector>
+#include<string.h>
+#define edge pair< int,int >
+#define ll long long int
 using namespace std;
- 
-typedef long long ll;
-int n;
-vector<pair<int,ll> > nb[100001];
+vector< pair<int,ll> > G[100001];
+ll weight[100001];
 int parent[100001][24];
 int depth[100001];
-ll weight[100001];
- 
-void cl() {
-	for (int i = 1; i <=n; ++i) {
-		nb[i].clear();
-		weight[i] = 0;
-		depth[i] = 0;
+int n;
+int reset()
+{
+	int i;
+	for(i=1;i<=n;i++) {
+		G[i].clear();
 	}
 }
- 
-void dfs(int u, int p) {
-	parent[u][0] = p;
-	depth[u] = depth[p]+1;
-	for(size_t i = 0; i < nb[u].size(); ++i) {
-		int v = nb[u][i].first;
-		ll w = nb[u][i].second;
-		if (v != p) {
-			weight[v] = weight[u] + w;
-			dfs(v, u);
-		}
-	}
-}
- 
-void pre() {
-	for (int i = 1; (1<<i) <= n; ++i) {
-		for (int j = 1; j<=n; ++j) {
-			parent[j][i] = parent[parent[j][i-1]][i-1];
+int dfs(int u, int p)
+{
+	// p = parent of node u
+	parent[u][0]=p;
+	depth[u]=depth[p]+1;
+	int sz=G[u].size();
+	int i;
+	for(i=0;i<sz;i++) {
+		int v=G[u][i].first;
+		int w=G[u][i].second;
+		if(v!=p) {
+			weight[v]=weight[u]+w;
+			dfs(v,u);
 		}
 	}
 }
- 
-int lca(int u, int v) {
-	if (depth[u] < depth[v]) swap(u,v);
-	int LOG = 23;
-	while(depth[u] != depth[v]) {
-		if (depth[u]-(1<<LOG) >= depth[v]) {
-			u = parent[u][LOG];
+int pre()
+{
+	// pre compute the 2^i th parent
+	// 2^i th parent of node j is stored at 
+	// parent[j][i]
+	// parent[j][0] is already computed in 
+	// dfs()
+	int i,j;
+	for(i=1;(1<<i)<=n;i++) {
+		for(j=1;j<=n;j++) {
+			parent[j][i]=parent[parent[j][i-1]][i-1];
 		}
-		--LOG;
-		if (LOG < 0) LOG = 0;
 	}
-	LOG = 23;
-	while(u != v) {
-		if (parent[u][LOG] != parent[v][LOG] || LOG == 0) {
-			u = parent[u][LOG];
-			v = parent[v][LOG];
+}
+int lca(int u, int v)
+{
+	if(depth[u]<depth[v]) {
+		int temp=v;
+		v=u;
+		u=temp;
+	}
+	// bringing them to the same depth
+	int LOG=23;
+	while(depth[u]!=depth[v]) {
+		if( (depth[u]-(1<<LOG)) >= depth[v] ) {
+			u=parent[u][LOG];
 		}
-		--LOG;
-		if (LOG < 0) LOG = 0;
+		LOG--;
+		if(LOG<0)
+			LOG=0;
+	}
+	// bringing them to the same node
+	LOG=23;
+	while(u!=v) {
+		if( parent[u][LOG]!=parent[v][LOG] || LOG==0 ) {
+			u=parent[u][LOG];
+			v=parent[v][LOG];
+		}
+		LOG--;
+		if(LOG<0)
+			LOG=0;
 	}
 	return u;
 }
- 
-int kth(int u, int v, int k) {
-	int w = lca(u,v);
-	int d1 = depth[u]-depth[w]+1;
-	int d2 = depth[v]-depth[w]+1;
+ll dist(int u, int v)
+{
+	int w=lca(u,v);
+	return ((weight[u]+weight[v])-(2*weight[w]));
+}
+int kth(int u, int v, int k)
+{
+	int w=lca(u,v);
+	int d1=depth[u]-depth[w]+1;
+	int d2=depth[v]-depth[w]+1;
 	int from;
-	if (d1 < k) {
-		from = v;
-		k = d2+d1-k-1;
-	} else if(k == d1) {
+	if(d1<k) {
+		k=(d1+d2)-(k+1);
+		from=v;
+	} else if(d1==k) {
 		return w;
-	} else if (d1 > k) {
-		from = u;
+	} else if(d1>k) {
+		from=u;
 		k-=1;
 	}
-	int LOG = 23;
-	while (k != 0) {
-		if (1<<LOG <= k) {
-			from = parent[from][LOG];
-			k-= (1<<LOG);
+	// finding the kth ancestor from "from" node
+	int LOG=23;
+	while(k!=0) {
+		if( (1<<LOG) <= k ) {
+			from=parent[from][LOG];
+			k-=(1<<LOG);
 		}
 		--LOG;
-		if (LOG < 0) LOG = 0;
+		if(LOG<0)
+			LOG=0;
 	}
 	return from;
 }
- 
-ll dist(int u, int v) {
-	int w = lca(u,v);
-	return weight[u]+weight[v] - 2LL*weight[w];
-}
- 
-int main() {
+int main()
+{
 	int t;
 	scanf("%d",&t);
 	while(t--) {
+		int i,j;
+		reset();
 		scanf("%d",&n);
-		for(int i = 1; i<n; ++i) {
+		for(i=1;i<=n-1;i++) {
 			int a,b,c;
-			scanf("%d%d%d",&a,&b,&c);
-			nb[a].push_back(make_pair(b,c));
-			nb[b].push_back(make_pair(a,c));
+			scanf("%d %d %d",&a,&b,&c);
+			G[a].push_back(make_pair(b,c));
+			G[b].push_back(make_pair(a,c));
 		}
-		dfs(1, 0);
+		dfs(1,0);
 		pre();
-		char opr[10];
+		char op[5];
 		while(1) {
-			scanf("%s", opr);
-			if (opr[0] == 'D' && opr[1] == 'O') {
+			scanf("%s",op);
+			if(strcmp(op,"DONE")==0) {
 				break;
-			} else if (opr[0] == 'K') {
-				int u,v,k;
-				scanf("%d%d%d",&u,&v,&k);
-				printf("%d\n", kth(u,v,k));
-			} else if(opr[0] == 'D' && opr[1] == 'I') {
+			} else if(strcmp(op,"DIST")==0) {
 				int u,v;
-				scanf("%d%d",&u,&v);
-				printf("%lld\n", dist(u,v));
+				scanf("%d %d",&u,&v);
+				printf("%lld\n",dist(u,v));
+			} else if(strcmp(op,"KTH")==0) {
+				int a,b,c;
+				scanf("%d %d %d",&a,&b,&c);
+				printf("%d\n",kth(a,b,c));
 			}
 		}
-		cl();
 	}
 	return 0;
 }
