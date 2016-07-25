@@ -5,7 +5,7 @@
 using namespace std;
 int main()
 {
-    long long int t,n,i;
+    ll t,n,i;
     scanf("%lld",&t);
     while(t--) {
         scanf("%lld",&n);
@@ -47,9 +47,11 @@ int main()
                 visited[0]=true;
                 visited[1]=true;
             }
+            ll flag1=0;
             for(i=1;i<n;i++) {
                 if( a[i]> no ) {
                     status[k]=false;
+                    flag1=1;
                     break;
                 }
                 else if(a[i]==no) {
@@ -89,6 +91,7 @@ int main()
                     continue;
                 }
                 status[k]=false;
+                flag1=1;
                 break;
             }
             ll flag=0;
@@ -98,7 +101,8 @@ int main()
                     break;
                 }
             }
-            if(flag) {
+            //printf("%lld %lld\n",flag,flag1);
+            if(flag || flag1) {
                 status[k]=false;
             } else {
                 status[k]=true;
