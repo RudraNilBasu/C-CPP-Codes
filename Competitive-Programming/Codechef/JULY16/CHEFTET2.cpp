@@ -54,42 +54,51 @@ int main()
                     flag1=1;
                     break;
                 }
-                else if(a[i]==no) {
+                // itself
+                if(a[i]==no) {
                     continue;
                 }
+                // i-1
                 if( !visited[i-1] && (a[i]+b[i-1])==no ) {
                     visited[i-1]=true;
                     continue;
                 }
-                if(!visited[i] && (a[i]+b[i])==no) {
-                    visited[i]=true;
-                    continue;
-                }
-                if( i!=(n-1) && !visited[i+1] && (a[i]+b[i+1])==no) {
-                    visited[i+1]=true;
-                    continue;
-                }
+                // i-1, i
                 if( !visited[i-1] && !visited[i] && (a[i]+b[i-1]+b[i])==no ) {
                     visited[i-1]=true;
                     visited[i]=true;
                     continue;
                 }
-                if( i!=(n-1) && !visited[i] && !visited[i+1] && (a[i]+b[i+1]+b[i])==no ) {
-                    visited[i+1]=true;
-                    visited[i]=true;
-                    continue;
-                }
+                // i-1 , i+1
                 if( i!=(n-1) && !visited[i-1] && !visited[i+1] && (a[i]+b[i+1]+b[i-1])==no ) {
                     visited[i+1]=true;
                     visited[i-1]=true;
                     continue;
                 }
+                // i, i-1, i+1
                 if( i!=(n-1) && !visited[i-1] && !visited[i] && !visited[i+1] && (a[i]+b[i-1]+b[i]+b[i+1])==no ) {
                     visited[i-1]=true;
                     visited[i+1]=true;
                     visited[i]=true;
                     continue;
                 }
+                // i
+                if(!visited[i] && (a[i]+b[i])==no) {
+                    visited[i]=true;
+                    continue;
+                }
+                // i+1
+                if( i!=(n-1) && !visited[i+1] && (a[i]+b[i+1])==no) {
+                    visited[i+1]=true;
+                    continue;
+                }
+                // i, i+1
+                if( i!=(n-1) && !visited[i] && !visited[i+1] && (a[i]+b[i+1]+b[i])==no ) {
+                    visited[i+1]=true;
+                    visited[i]=true;
+                    continue;
+                }
+
                 status[k]=false;
                 flag1=1;
                 break;
