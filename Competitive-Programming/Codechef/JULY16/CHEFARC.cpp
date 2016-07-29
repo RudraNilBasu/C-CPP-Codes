@@ -20,10 +20,16 @@ bool isValid(cell num) {
         return false;
     return true;
 }
-
+int ab(int x)
+{
+    if(x<0) {
+        return -1*x;
+    }
+    return x;
+}
 int main()
 {
-    int t,i,j,k1,k2;
+    int t,i,j,k1,k2,k,a1,a2;
     scanf("%d",&t);
 
     cell moves[4];
@@ -52,6 +58,7 @@ int main()
         while(!q.empty()) {
             cell u=q.front();
             q.pop();
+            /*
             for(i=0;i<4;i++) {
                 cell temp;
                 temp.x=u.x+moves[i].x;
@@ -62,15 +69,68 @@ int main()
                     q.push(temp);
                 }
             }
+            */
+            /*
+            for(a1=0;a1<n;a1++) {
+                for(a2=0;a2<m;a2++) {
+                    if( a1==u.x && a2==u.y ) {
+                        continue;
+                    }
+                    if(a[a1][a2]==1) {
+                        continue;
+                    }
+                    if( (ab(a1-u.x) + ab(a2-u.y)) <=k1 && (dist[a1][a2]==-1 || dist[a1][a2]>(dist[u.x][u.y]+1) ) ) {
+                        dist[a1][a2]=dist[u.x][u.y]+1;
+                        cell temp;
+                        temp.x=a1;temp.y=a2;
+                        q.push(temp);
+                    }
+                }
+            }
+            */
+            for(i=0;i<=k1;i++) {
+                for(j=0;j<=k1-i;j++) {
+                    if(i==j && i==0) {
+                        continue;
+                    }
+                    cell temp;
+                    temp.x=u.x+i;
+                    temp.y=u.y+j;
+                    if( isValid(temp) && a[temp.x][temp.y]!=1 && (dist[temp.x][temp.y]==-1 || dist[temp.x][temp.y]>(dist[u.x][u.y]+1) )) {
+                        dist[temp.x][temp.y]=dist[u.x][u.y]+1;
+                        q.push(temp);
+                    }
+                    temp.x=u.x-i;
+                    temp.y=u.y+j;
+                    if( isValid(temp) && a[temp.x][temp.y]!=1 && (dist[temp.x][temp.y]==-1 || dist[temp.x][temp.y]>(dist[u.x][u.y]+1) )) {
+                        dist[temp.x][temp.y]=dist[u.x][u.y]+1;
+                        q.push(temp);
+                    }
+
+                    temp.x=u.x+i;
+                    temp.y=u.y-j;
+                    if( isValid(temp) && a[temp.x][temp.y]!=1 && (dist[temp.x][temp.y]==-1 || dist[temp.x][temp.y]>(dist[u.x][u.y]+1) )) {
+                        dist[temp.x][temp.y]=dist[u.x][u.y]+1;
+                        q.push(temp);
+                    }
+
+                    temp.x=u.x-i;
+                    temp.y=u.y-j;
+                    if( isValid(temp) && a[temp.x][temp.y]!=1 && (dist[temp.x][temp.y]==-1 || dist[temp.x][temp.y]>(dist[u.x][u.y]+1) )) {
+                        dist[temp.x][temp.y]=dist[u.x][u.y]+1;
+                        q.push(temp);
+                    }
+                }
+            }
         }
-        /*
+/*
         for(i=0;i<n;i++) {
             for(j=0;j<m;j++) {
                 printf("%d ",dist[i][j]);
             }
             printf("\n");
         }
-        */
+*/
 
         // for 0,m-1
         int dist2[n][m];
@@ -84,6 +144,7 @@ int main()
         while(!q2.empty()) {
             cell u=q2.front();
             q2.pop();
+            /*
             for(i=0;i<4;i++) {
                 cell temp;
                 temp.x=u.x+moves[i].x;
@@ -94,8 +155,61 @@ int main()
                     q2.push(temp);
                 }
             }
+            */
+            /*
+            for(a1=0;a1<n;a1++) {
+                for(a2=0;a2<m;a2++) {
+                    if( a1==u.x && a2==u.y ) {
+                        continue;
+                    }
+                    if(a[a1][a2]==1) {
+                        continue;
+                    }
+                    if( (ab(a1-u.x) + ab(a2-u.y)) <=k2 && (dist2[a1][a2]==-1 || dist2[a1][a2]>(dist2[u.x][u.y]+1) ) ) {
+                        dist2[a1][a2]=dist2[u.x][u.y]+1;
+                        cell temp;
+                        temp.x=a1;temp.y=a2;
+                        q2.push(temp);
+                    }
+                }
+            }
+            */
+            for(i=0;i<=k2;i++) {
+                for(j=0;j<=k2-i;j++) {
+                    if(i==j && i==0) {
+                        continue;
+                    }
+                    cell temp;
+                    temp.x=u.x+i;
+                    temp.y=u.y+j;
+                    if( isValid(temp) && a[temp.x][temp.y]!=1 && (dist2[temp.x][temp.y]==-1 || dist2[temp.x][temp.y]>(dist2[u.x][u.y]+1) )) {
+                        dist2[temp.x][temp.y]=dist2[u.x][u.y]+1;
+                        q2.push(temp);
+                    }
+                    temp.x=u.x-i;
+                    temp.y=u.y+j;
+                    if( isValid(temp) && a[temp.x][temp.y]!=1 && (dist2[temp.x][temp.y]==-1 || dist2[temp.x][temp.y]>(dist2[u.x][u.y]+1) )) {
+                        dist2[temp.x][temp.y]=dist2[u.x][u.y]+1;
+                        q2.push(temp);
+                    }
+
+                    temp.x=u.x+i;
+                    temp.y=u.y-j;
+                    if( isValid(temp) && a[temp.x][temp.y]!=1 && (dist2[temp.x][temp.y]==-1 || dist2[temp.x][temp.y]>(dist2[u.x][u.y]+1) )) {
+                        dist2[temp.x][temp.y]=dist2[u.x][u.y]+1;
+                        q2.push(temp);
+                    }
+
+                    temp.x=u.x-i;
+                    temp.y=u.y-j;
+                    if( isValid(temp) && a[temp.x][temp.y]!=1 && (dist2[temp.x][temp.y]==-1 || dist2[temp.x][temp.y]>(dist2[u.x][u.y]+1) )) {
+                        dist2[temp.x][temp.y]=dist2[u.x][u.y]+1;
+                        q2.push(temp);
+                    }
+                }
+            }
         }
-        /*
+/*
         printf("--------------\n");
         for(i=0;i<n;i++) {
             for(j=0;j<m;j++) {
@@ -103,7 +217,7 @@ int main()
             }
             printf("\n");
         }
-        */
+*/
         int res[n][m];
         int ans=INT_MAX;
         for(i=0;i<n;i++) {
