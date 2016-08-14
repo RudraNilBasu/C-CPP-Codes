@@ -7,6 +7,7 @@ int max(int a, int b)
 	return b;
 }
 using namespace std;
+// find max of left and right traversals
 int main()
 {
 	int n,i;
