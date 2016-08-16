@@ -36,7 +36,10 @@ ll min3(ll a, ll b, ll c)
 
 ll maxScore(int player, int index)
 {
-	//printf("Index = %d\n", index);
+	// to calculate the best point the player can get
+	// if it is currently the player/friend's turn
+	// friend => player=0
+	// player => player=1
 	if(index>=n)
 	{
 		return 0;
@@ -68,8 +71,8 @@ ll maxScore(int player, int index)
 			return dp[player][index]=0;
 	}
 
-	//printf("Player %d Index %d\n",player, index);
 	if(player) {
+		// player will want to maximise the point of the player
 		return dp[player][index]=
 			max3(
 				a[index]+maxScore(!player, index+1),
@@ -77,6 +80,7 @@ ll maxScore(int player, int index)
 				a[index]+a[index+1]+a[index+2]+maxScore(!player, index+3)
 			   );
 	} else {
+		// friend will want to minimise the point of the player
 		return dp[player][index]=
 			min3(
 				maxScore(!player, index+1),
@@ -98,8 +102,6 @@ int main()
 			scanf("%lld",&a[i]);
 		}
 		printf("%lld\n",maxScore(1,0));
-		//printf("test %lld\n",maxScore(0,1));
-		//printf("HUe %lld\n",max3( maxScore(0,1), maxScore(0,2), maxScore(0,3)  ));
 	}
 	return 0;
 }
