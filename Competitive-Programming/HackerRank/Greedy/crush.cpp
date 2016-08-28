@@ -8,23 +8,25 @@
 #define ll long long int
 using namespace std;
 
-ll arr[10000001];
+ll arr[10000002];
 int main() {
     int n,m,a,b,i;
     scanf("%d %d",&n, &m);
-    ll k, max, max_in_range;
+    ll k, max;
     max=0;
-    max_in_range=0;
     memset(arr,0,sizeof(arr));
     while(m--) {
         scanf("%d %d %lld",&a,&b,&k);
-        for(i=a-1;i<b;i++) {
-            arr[i]+=k;
+        arr[a]+=k;
+        if(b+1<=n) {
+            arr[b+1]-=k;
         }
     }
-    for(i=0;i<n;i++) {
-        if(max<arr[i]) {
-            max=arr[i];
+    ll x=0;
+    for(i=1;i<=n;i++) {
+        x=x+arr[i];
+        if(x>max) {
+            max=x;
         }
     }
     printf("%lld\n",max);
