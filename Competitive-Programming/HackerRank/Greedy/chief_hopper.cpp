@@ -65,8 +65,8 @@ int main() {
 	ll low, high, mid;
 	//low=a[0];
 	low=0;
-	high=linf;
-	//high=max;
+	//high=linf;
+	high=max;
 	while(low<high) {
 		mid=(low+high)/2;
 		if(check(mid)) {
