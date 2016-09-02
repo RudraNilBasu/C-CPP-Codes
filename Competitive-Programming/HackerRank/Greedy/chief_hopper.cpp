@@ -24,26 +24,14 @@ bool check(ll x)
 {
 	int i;
 	for(i=0;i<n;i++) {
-		//printf("x=%d\ta[i]=%d\n",x,a[i]);
-		//if(a[i]>x) {
-		/*
-		if(x<0) {	
-			return false;
-		}
-		*/
-		//printf("Adding %d\n",mod(x-a[i]));
-		//x+=mod(x-a[i]);
+		
 		x = x + (x-a[i]);
 		if(x>=linf)
 			return true;
 		if(x<0)
 			return false;
-		//printf("x is now=%d\n",x);
+		
 	}
-	/*
-	if(x<0)
-		return false;
-	*/
 	return true;
 }
 
