@@ -8,7 +8,6 @@ using namespace std;
 
 #define ll long long int
 #define linf 0x3f3f3f3f3f3f3f3fLL
-//#define linf LLONG_MAX
 
 int *a;
 int n;
@@ -47,8 +46,7 @@ int main() {
 		}
 	}
 	
-	//printf("%d\n",check(51180));
-	//printf("%d\n",max);
+	
 	
 	ll low, high, mid;
 	//low=a[0];
