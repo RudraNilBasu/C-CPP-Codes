@@ -38,7 +38,7 @@ int main()
 	for(i=0;i<4;i++) {
 		printf("%c\t%d\n",genes[i],letter_count[genes[i]]);
 	}
-	*/
+*/	
 	int start=0,end=0,min_length=n;
 	map<char,int> substring; // stores freq of characters
 	//in the substring [start....end)
