@@ -27,6 +27,7 @@ int main()
     min_end=min(r1,r2);
     ll ans=0;
     ans=min_end-min_start+1;
+    // if in range
     if(k>=min_start && k<=min_end) {
         ans--;
     }
@@ -34,7 +35,6 @@ int main()
     	printf("0\n");
 	return 0;
     }
-    //printf("%lld\n",ans);
 	cout << ans << endl;
     return 0;
 }
