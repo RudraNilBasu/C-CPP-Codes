@@ -72,7 +72,8 @@ int main()
 		for(i=n-2;i>=1;i--) {
 			//if(gcd(i,i+1)==1 && gcd(i,i+2)==1 && gcd(i+1,i+2)==1) {
 			//if(isPrime[i] && isPrime[i+1] && isPrime[i+2]) {
-			if(check(i,i+1)&&check(i,i+2)&&check(i+1,i+2) ) {
+			if(gcd(i,i+2)==1) {
+			//if(check(i,i+1)&&check(i,i+2)&&check(i+1,i+2) ) {
 				//printf("%lld %lld %lld\n",i,i+1,i+2);
 				count = (count%n + i%n)%n;
 			}
