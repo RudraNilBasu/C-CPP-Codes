@@ -33,3 +33,8 @@
 
 # Files Generated from GEDIT
 *.*~
+
+
+# Input / Output Files
+inp.txt
+out.txt
