@@ -5,8 +5,19 @@
 #include<queue>
 #include<map>
 #include<math.h>
+#include<iostream>
 
 #define ll long long int
+#define ull unsigned ll
+
+#define PI 3.14159265
+#define DEBUG(X) cout << (X) << endl;
+
+// inputs
+#define inpd(x) scanf("%d",&x)
+#define inpc(x) scanf("%c",&x)
+
+using namespace std;
 
 int max(int a, int b)
 {
@@ -15,66 +26,41 @@ int max(int a, int b)
 	return b;
 }
 
-using namespace std;
+int max3(int a, int b, int c)
+{
+	return max(a,max(b,c));
+}
+
+int gcd(int a, int b)
+{
+	if(b==0)
+		return a;
+	return gcd(b,a%b);
+}
 
 int main()
 {
-	int n,k,i;
+	int n,k;
 	scanf("%d %d",&n,&k);
 	int a[n];
 	int b[n];
+	int i;
 	for(i=0;i<n;i++) {
 		scanf("%d",a+i);
 		b[i]=a[i];
 	}
-	/*
-	for(i=0;i<n-1;i++) {
-		if(b[i]+b[i+1]>=k) {
-			continue;
-		} else {
-			if(i<n-2) {
-				if(b[i+1]+b[i+2]>=k) {
-					b[i]=k-b[i+1];
-					continue;
-					
-					
-				} else {
-					int l=k-(b[i+1]+b[i]);
-					int l2=k-(b[i+1]+b[i+2]);
-					int m=k-(b[i+1]+min(b[i],b[i+2]));
-					if(m<=(l2+l)) {
-						b[i+1]+=m;
-						//continue;
-					} else {
-						b[i]+=l;
-						b[i+2]+=l2;
-						i=i+2;
-						//continue;
-					}
-				}
-			} else {
-				if(b[i]>b[i+1]) {
-					b[i]=k-b[i+1];
-				} else {
-					b[i+1]=k-b[i];
-				}
-			}
+	int walk=0;
+	for(i=1;i<n;i++) {
+		if(b[i-1]+b[i]<k) {
+			b[i]=k-b[i-1];
+			walk+=(b[i]-a[i]);
 		}
 	}
-	*/
-	for(i=0;i<n-1;i++) {
-		if(b[i]+b[i+1]<k) {
-			b[i+1]+=k-(b[i]+b[i+1]);
-		}
-	}
-	int diff=0;
-	for(i=0;i<n;i++) {
-		diff+=b[i]-a[i];
-	}
-	printf("%d\n",diff);
+	printf("%d\n",walk);
 	for(i=0;i<n;i++) {
 		printf("%d ",b[i]);
 	}
 	printf("\n");
 	return 0;
 }
+
