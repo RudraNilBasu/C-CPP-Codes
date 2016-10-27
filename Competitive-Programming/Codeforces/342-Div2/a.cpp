@@ -64,7 +64,10 @@ int main()
 {
 	ull n,a,b,c;
 	cin>>n>>a>>b>>c;
-	cout<<findMax(n,a,b,c)<<endl;
+	if(a<(b-c)) {
+		cout<<(ull)(n/a)<<endl;
+	}
+	//cout<<findMax(n,a,b,c)<<endl;
 	/*
 	ull ans=0,cost=n;
 	if(a>b) {
