@@ -38,35 +38,22 @@ int gcd(int a, int b)
 	return gcd(b,a%b);
 }
 
-map<ull,ull> mp;
 
-ull findMax(ull cost, ull a, ull b, ull c)
-{
-	if(mp[cost]!=0) {
-		return mp[cost];
-	}
-	if(cost<a && cost<b) {
-		return 0;
-	}
-	if(cost>=a && cost<b) {
-		return mp[cost]=1+findMax(cost-a, a, b, c);
-	} else if(cost<a && cost>=b) {
-		return mp[cost]=1+findMax(cost-(b-c), a, b, c);
-	} else {
-		return mp[cost]=1+max(
-				findMax(cost-a, a, b, c),
-				findMax(cost-(b-c), a, b, c)
-				);
-	}
-}
 
 int main()
 {
 	ull n,a,b,c;
 	cin>>n>>a>>b>>c;
-	if(a<(b-c)) {
+	if(a<=(b-c)||n<b) {
 		cout<<(ull)(n/a)<<endl;
+	} else {
+		// spend with b while you still can
+		ull k=(n-c)/(b-c); // bought k bottles
+		n-=k*(b-c); // cost left
+		k+=(n/a);
+		cout<<k<<endl;
 	}
+	return 0;
 	//cout<<findMax(n,a,b,c)<<endl;
 	/*
 	ull ans=0,cost=n;
