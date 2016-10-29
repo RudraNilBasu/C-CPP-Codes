@@ -41,7 +41,7 @@ int gcd(int a, int b)
 int main()
 {
 	ull n;
-	cin>>n;
+	cin>>n
 	return 0;
 }
 
