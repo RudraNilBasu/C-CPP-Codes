@@ -45,7 +45,7 @@ ll isPossible(ll ht, ll a[], ll n, ll m)
 	ll i;
 	ll count=0;
 	for(i=0;i<n;i++) {
-		if(a[i]>=ht) {
+		if(a[i]-ht>0) {
 			count+=a[i]-ht;
 		}
 	}
@@ -74,25 +74,28 @@ int main()
 	}
 	*/
 	ll count;
+	ll h=0;
 	while(low<=high) {
-		//mid=(a[low]+a[high])/2;
 		mid=(low+high)/2;
-		if(mid==low) break;
 		//printf("low=%lld\tmid=%lld\thigh=%lld\n",low,mid,high);
 		count=isPossible(mid,a,n,m);
 		//if(isPossible(mid,a,n,m)) {
 		if(count>m) {
-			low=mid;
+			low=mid+1;
+			if(mid>h) {
+				h=mid;
+			}
 			//printf("IS possible with %lld. New Low=%lld\n",mid,low);
-		} else if(count<mid) {
+		} else if(count<m) {
 			high=mid-1;
 			//printf("NOT possible with %lld. New High=%lld\n",mid,high);
 		} else {
-			low=mid;
+			h=mid;
+			//low=mid;
 			break;
 		}
 	}
-	printf("%lld\n",low);
+	printf("%lld\n",h);
 	return 0;
 }
 
