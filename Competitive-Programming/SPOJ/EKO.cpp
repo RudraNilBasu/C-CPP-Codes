@@ -38,25 +38,61 @@ int gcd(int a, int b)
 	return gcd(b,a%b);
 }
 
+ll isPossible(ll ht, ll a[], ll n, ll m)
+{
+	// to check if we can get wood of value m
+	// by cutting ht amt of height
+	ll i;
+	ll count=0;
+	for(i=0;i<n;i++) {
+		if(a[i]>=ht) {
+			count+=a[i]-ht;
+		}
+	}
+	return count;
+	//return count>=m;
+}
+
 int main()
 {
-	int n,i;
+	ll n,i;
 	ll m;
-	cin>>n>>m;
+	scanf("%lld %lld",&n,&m);
 	ll a[n];
 	for(i=0;i<n;i++) {
 		scanf("%lld",a+i);
 	}
 	sort(a,a+n);
-	ll low=0,high=n-1,mid;
-	while(low<high) {
-		mid=(a[low]+a[high])/2;
-		if(isPossible(mid,n,m)) {
-			low=
-		} else {
-			//
+	ll low=a[0],high=a[n-1],mid;
+	low=0;
+	/*
+	for(mid=high;mid>=0;mid--) {
+		if(isPossible(mid,a,n,m)) {
+			printf("%lld\n",mid);
+			return 0;
 		}
 	}
+	*/
+	ll count;
+	while(low<=high) {
+		//mid=(a[low]+a[high])/2;
+		mid=(low+high)/2;
+		if(mid==low) break;
+		//printf("low=%lld\tmid=%lld\thigh=%lld\n",low,mid,high);
+		count=isPossible(mid,a,n,m);
+		//if(isPossible(mid,a,n,m)) {
+		if(count>m) {
+			low=mid;
+			//printf("IS possible with %lld. New Low=%lld\n",mid,low);
+		} else if(count<mid) {
+			high=mid-1;
+			//printf("NOT possible with %lld. New High=%lld\n",mid,high);
+		} else {
+			low=mid;
+			break;
+		}
+	}
+	printf("%lld\n",low);
 	return 0;
 }
 
