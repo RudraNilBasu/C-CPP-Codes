@@ -65,14 +65,6 @@ int main()
 	sort(a,a+n);
 	ll low=a[0],high=a[n-1],mid;
 	low=0;
-	/*
-	for(mid=high;mid>=0;mid--) {
-		if(isPossible(mid,a,n,m)) {
-			printf("%lld\n",mid);
-			return 0;
-		}
-	}
-	*/
 	ll count;
 	ll h=0;
 	while(low<=high) {
