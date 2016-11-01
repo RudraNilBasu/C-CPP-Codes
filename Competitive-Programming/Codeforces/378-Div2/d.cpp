@@ -50,6 +50,8 @@ float min3(float a, float b, float c)
 	return min( a, min(b, c));
 }
 
+// http://codeforces.com/contest/733/submission/21959499
+
 typedef struct rect{
 	ll a;
 	ll b;
