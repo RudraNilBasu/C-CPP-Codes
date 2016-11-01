@@ -40,7 +40,7 @@ int gcd(int a, int b)
 
 bool isVowel(char ch)
 {
-	if(ch=='A'||ch=='E'||ch=='I'||ch=='O'||ch=='U')
+	if(ch=='A'||ch=='E'||ch=='I'||ch=='O'||ch=='U'||ch=='Y')
 		return true;
 	return false;
 }
