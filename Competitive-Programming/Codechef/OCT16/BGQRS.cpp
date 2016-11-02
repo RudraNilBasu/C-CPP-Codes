@@ -72,6 +72,43 @@ tree calc(ll n)
 	return q;
 }
 
+tree query(int ss, int se, int qs, int qe, int node)
+{
+	// check lazy
+	if()
+}
+
+void replaceUtil(int ss, int se, int qs, int qe, tree q, int stIndex)
+{
+	// check lazy things
+	// out of range
+	if(ss>qe||se<qs) {
+		return;
+	}
+	// fully in range
+	if(ss>=qs && se<=qe) {
+		st[stIndex]._2=q._2*(se-ss+1);
+		st[stIndex]._5=q._5*(se-ss+1);
+		st[stIndex]._2+=(div[se-qs+1]._2-div[ss-qs]._2);
+		st[stIndex]._5+=(div[se-qs+1]._5-div[ss-qs]._5);
+		// lazy check
+		return;
+	}
+	int mid=(ss+se)/2;
+	int left=2*stIndex+1;
+	int right=left+1;
+	replaceUtil(ss,mid,qs,qe,q,left);
+	replaceUtil(mid+1,se,qs,qe,q,right);
+	st[stIndex]._2=st[left]._2+st[right]._2;
+	st[stIndex]._5=st[left]._5+st[right]._5;
+	return;
+}
+
+void replace(int l, int r, tree x)
+{
+	replaceUtil(0,n-1,l,r,x,0);
+}
+
 void multUtil(int ss, int se, int qs, int qe, tree q, int stIndex)
 {
 	// if lazy checking
@@ -82,7 +119,17 @@ void multUtil(int ss, int se, int qs, int qe, tree q, int stIndex)
 		// within the segment
 		st[stIndex]._2+=q._2*(se-ss+1);
 		st[stIndex]._5+=q._5*(se-ss+1);
+		// lazy stufs
+		return ;
 	}
+	int mid=(ss+se)/2;
+	int left=2*stIndex+1;
+	int right=left+1;
+	multUtil(ss,mid,qs,qe,q,left);
+	multUtil(mid+1,se,qs,qe,q,right);
+	st[stIndex]._2=st[left]._2+st[right]._2;
+	st[stIndex]._5=st[left]._5+st[stIndex]._5;
+	return ;
 }
 
 void mult(int l, int r, tree x)
@@ -144,6 +191,7 @@ int main()
 				mult(l-1,r-1,calc(x));
 			} else if(id==2) {
 				scanf("%d %d %d",&l,&r,&y);
+				replace(l-1,r-1,calc(x));
 			} else if(id==3) {
 				scanf("%d %d",&l,&r);
 			}
