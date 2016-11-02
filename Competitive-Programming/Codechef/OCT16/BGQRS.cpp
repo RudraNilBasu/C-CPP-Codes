@@ -99,7 +99,7 @@ tree query(int ss, int se, int qs, int qe, int stIndex)
 		return st[stIndex];
 	}
 	int mid=(ss+se)/2;
-	int left=2*stIndex+1;
+	int left=2*stIndex;
 	int right=left+1;
 	tree p=query(ss,mid,qs,qe,left);
 	tree q=query(mid+1,se,qs,qe,right);
@@ -117,7 +117,7 @@ void replaceUtil(int ss, int se, int qs, int qe, tree q, int stIndex)
 			st[stIndex]._5 += (div[se-lazy[stIndex].l+1]._5-div[ss-lazy[stIndex].l]._5);
 			if(ss!=se)
 			{
-				int left=2*stIndex+1;
+				int left=2*stIndex;
 				int right=left+1;
 				lazy[left].l = lazy[stIndex].l;
 				lazy[right].l = lazy[stIndex].l;
@@ -135,7 +135,7 @@ void replaceUtil(int ss, int se, int qs, int qe, tree q, int stIndex)
 		st[stIndex]._2=lazy[stIndex]._2*(se-ss+1);
 		st[stIndex]._5=lazy[stIndex]._5*(se-ss+1);
 		if(ss!=se) {
-			int left=2*stIndex+1;
+			int left=2*stIndex;
 			int right=left+1;
 			lazy[left]._2+=lazy[stIndex]._2;
 			lazy[left]._5+=lazy[stIndex]._5;
@@ -161,7 +161,7 @@ void replaceUtil(int ss, int se, int qs, int qe, tree q, int stIndex)
 		st[stIndex]._5+=(div[se-qs+1]._5-div[ss-qs]._5);
 		// lazy check
 		if(ss!=se) {
-			int left=2*stIndex+1;
+			int left=2*stIndex;
 			int right=left+1;
 			lazy[left].l=qs;
 			lazy[left].q=q;
@@ -177,7 +177,7 @@ void replaceUtil(int ss, int se, int qs, int qe, tree q, int stIndex)
 		return;
 	}
 	int mid=(ss+se)/2;
-	int left=2*stIndex+1;
+	int left=2*stIndex;
 	int right=left+1;
 	replaceUtil(ss,mid,qs,qe,q,left);
 	replaceUtil(mid+1,se,qs,qe,q,right);
@@ -201,7 +201,7 @@ void multUtil(int ss, int se, int qs, int qe, tree q, int stIndex)
 			st[stIndex]._2+=(div[se-lazy[stIndex].l+1]._2-div[ss-lazy[stIndex].l]._2);
 			st[stIndex]._5+=(div[se-lazy[stIndex].l+1]._5-div[ss-lazy[stIndex].l]._5);
 			if(ss!=se) {
-				int left=2*stIndex+1;
+				int left=2*stIndex;
 				int right=left+1;
 				lazy[left].l=lazy[stIndex].l;
 				lazy[right].l=lazy[stIndex].l;
@@ -217,7 +217,7 @@ void multUtil(int ss, int se, int qs, int qe, tree q, int stIndex)
 			lazy[stIndex].l=-1;
 		}
 		//
-		int left=2*stIndex+1;
+		int left=2*stIndex;
 		int right=left+1;
 		st[stIndex]._2=lazy[stIndex]._2*(se-ss+1);
 		st[stIndex]._5=lazy[stIndex]._5*(se-ss+1);
@@ -243,7 +243,7 @@ void multUtil(int ss, int se, int qs, int qe, tree q, int stIndex)
 		st[stIndex]._5+=q._5*(se-ss+1);
 		if(ss!=se) {
 			// lazy stufs
-			int left=2*stIndex+1;
+			int left=2*stIndex;
 			int right=left+1;
 			lazy[left].state=1;
 			lazy[left]._2+=q._2;
@@ -255,7 +255,7 @@ void multUtil(int ss, int se, int qs, int qe, tree q, int stIndex)
 		return ;
 	}
 	int mid=(ss+se)/2;
-	int left=2*stIndex+1;
+	int left=2*stIndex;
 	int right=left+1;
 	multUtil(ss,mid,qs,qe,q,left);
 	multUtil(mid+1,se,qs,qe,q,right);
@@ -281,7 +281,7 @@ int constructUtil(int a[], int n, int ss, int se, int sIndex)
 		lazy[sIndex].state=0;
 		lazy[sIndex]._2=0;
 		lazy[sIndex]._5=0;
-		int left=2*sIndex+1;
+		int left=2*sIndex;
 		int right=left+1;
 		lazy[left].state=0;
 		lazy[left]._2=0;
@@ -297,7 +297,7 @@ int constructUtil(int a[], int n, int ss, int se, int sIndex)
 	int mid=(ss+se)/2;
 	constructUtil(a,n,ss,mid,sIndex*2+1);
 	constructUtil(a,n,mid+1,se,sIndex*2+2);
-	int left=sIndex*2+1;
+	int left=sIndex*2;
 	int right=left+1;
 	st[sIndex]._2=st[left]._2+st[right]._2;
 	st[sIndex]._5=st[left]._5+st[right]._5;
@@ -338,6 +338,11 @@ int main()
 		}
 		div[i]._2=div[num]._2+_2;
 		div[i]._5=div[num]._5+_5;
+	}
+	for(i=1;i<=100010;i++)
+	{
+		div[i]._2 = div[i]._2+div[i-1]._2;
+		div[i]._5 = div[i]._5+div[i-1]._5;
 	}
 	// one more thing
 	while(t--) {
