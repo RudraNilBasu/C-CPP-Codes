@@ -52,6 +52,7 @@ int main()
 		scanf("%lld",b+i);
 	}
 	i=0;
+	// if all values of b[] are not a subset of a[] then NO
 	return 0;
 }
 
