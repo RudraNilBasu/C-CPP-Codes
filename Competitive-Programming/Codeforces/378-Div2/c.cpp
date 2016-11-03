@@ -6,6 +6,7 @@
 #include<map>
 #include<math.h>
 #include<iostream>
+#include<string>
 
 #define ll long long int
 #define ull unsigned ll
@@ -49,10 +50,118 @@ int main()
 	scanf("%d",&k);
 	ll b[k];
 	for(i=0;i<k;i++) {
-		scanf("%lld",b+i);
+		cin>>b[i];
 	}
 	i=0;
 	// if all values of b[] are not a subset of a[] then NO
+	ll sum=0;
+	int m=0;
+	int g[k]; // stores the intervals
+	//cout<<"------------";
+	while(1) {
+		if(m>=k || i>=n) {
+			printf("NO\n");
+			return 0;
+		}
+		sum+=a[i];
+		//cout<<sum<<' '<<i<<endl;
+		if(sum>b[m]) {
+			printf("NO\n");
+			return 0;
+		} else if(sum==b[m]) {
+			g[m]=i;
+			m++;
+			sum=0;
+		} else if(sum<b[m] && i==n-1 && m==k-1) {
+			printf("NO\n");
+			return 0;	
+		}
+		if(m==k && i==n-1) {
+			break;
+		}
+		//cout<<"i="<<i<<endl;
+		//cout<<"m="<<m<<endl;
+		i++;
+		if(i>=n) {
+			printf("NO\n");
+			return 0;
+		}
+	}
+	g[k-1]=n-1;
+	int j;
+	m=0;
+	int index;
+	char dir;
+	vector<char> str;
+	vector<int> num;
+	int st=0;
+	int sz=0;
+	for(j=0;j<k;j++) {
+		//cout<<"j="<<j<<endl;
+		vector<ll> d;
+		map<ll,int> hash;
+		for(m=st;m<=g[j];m++) {
+			//cout<<a[m]<<endl;
+			d.push_back(a[m]);
+			hash[a[m]]++;
+		}
+		//printf("--------\n");
+		while(d.size()>1) {
+			if(hash.size()==1 && d.size()>1) {
+				printf("NO\n");
+				return 0;
+			}
+			// finding the max and pos
+			ll max=d[0];
+			int pos=0;
+			for(i=0;i<d.size();i++) {
+				if(max<d[i]) {
+					max=d[i];
+					pos=i;
+				}
+			}
+			/*
+			cout<<"Elements are\n";
+			for(i=0;i<d.size();i++) {
+				cout<<d[i]<<endl;
+			}
+			cout<<"Max pos="<<pos<<endl;*/
+			// if left is okay, eat left, else eat right
+			while(1) {
+				if(pos!=d.size()-1 && d[pos+1]<d[pos]) {
+					d[pos+1]+=d[pos];
+					index=sz+pos;
+					dir='R';
+					d.erase(d.begin()+pos);
+					break;
+				} else if(pos!=0 && d[pos-1]<d[pos]) {
+					d[pos-1]+=d[pos];
+					index=sz+pos;
+					dir='L';
+					d.erase(d.begin()+pos);
+					break;
+				} else {
+					if(pos==0) {
+						pos++;
+					} else if(pos==d.size()-1) {
+						pos--;
+					} else {
+						pos++;
+					}
+				}
+			}
+			//string s1=index+' '+to_string(dir);
+			//str.push_back(s1);
+			num.push_back(index+1);
+			str.push_back(dir);
+		}
+		st=g[j]+1;
+		sz++;
+	}
+	printf("YES\n");
+	for(i=0;i<str.size();i++) {
+		cout<<num[i]<<' '<<str[i]<<endl;
+	}
 	return 0;
 }
 
