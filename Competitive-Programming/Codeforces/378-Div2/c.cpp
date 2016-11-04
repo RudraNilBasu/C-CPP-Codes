@@ -57,14 +57,12 @@ int main()
 	ll sum=0;
 	int m=0;
 	int g[k]; // stores the intervals
-	//cout<<"------------";
 	while(1) {
 		if(m>=k || i>=n) {
 			printf("NO\n");
 			return 0;
 		}
 		sum+=a[i];
-		//cout<<sum<<' '<<i<<endl;
 		if(sum>b[m]) {
 			printf("NO\n");
 			return 0;
@@ -79,8 +77,6 @@ int main()
 		if(m==k && i==n-1) {
 			break;
 		}
-		//cout<<"i="<<i<<endl;
-		//cout<<"m="<<m<<endl;
 		i++;
 		if(i>=n) {
 			printf("NO\n");
@@ -97,21 +93,20 @@ int main()
 	int st=0;
 	int sz=0;
 	for(j=0;j<k;j++) {
-		//cout<<"j="<<j<<endl;
 		vector<ll> d;
 		map<ll,int> hash;
+		// creating each intervals in vector d
 		for(m=st;m<=g[j];m++) {
-			//cout<<a[m]<<endl;
 			d.push_back(a[m]);
 			hash[a[m]]++;
 		}
-		//printf("--------\n");
 		while(d.size()>1) {
+			// if all elements are same, then NO
 			if(hash.size()==1 && d.size()>1) {
 				printf("NO\n");
 				return 0;
 			}
-			// finding the max and pos
+			// finding the max and pos of max
 			ll max=d[0];
 			int pos=0;
 			for(i=0;i<d.size();i++) {
@@ -129,18 +124,21 @@ int main()
 			// if left is okay, eat left, else eat right
 			while(1) {
 				if(pos!=d.size()-1 && d[pos+1]<d[pos]) {
+					// if there is any element less than max in the right
 					d[pos+1]+=d[pos];
 					index=sz+pos;
 					dir='R';
 					d.erase(d.begin()+pos);
 					break;
 				} else if(pos!=0 && d[pos-1]<d[pos]) {
+					// if there is any element less than max in the left
 					d[pos-1]+=d[pos];
 					index=sz+pos;
 					dir='L';
 					d.erase(d.begin()+pos);
 					break;
 				} else {
+					// this case: 2 2 1 2 2
 					if(pos==0) {
 						pos++;
 					} else if(pos==d.size()-1) {
@@ -150,8 +148,6 @@ int main()
 					}
 				}
 			}
-			//string s1=index+' '+to_string(dir);
-			//str.push_back(s1);
 			num.push_back(index+1);
 			str.push_back(dir);
 		}
