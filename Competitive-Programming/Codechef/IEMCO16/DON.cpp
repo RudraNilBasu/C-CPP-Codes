@@ -77,6 +77,7 @@ int main()
 	while(t--) {
 		scanf("%s",s);
 		int n=strlen(s);
+		/*
 		int a[n];
 		for(i=0;i<n;i++) {
 			if(s[i]=='I') {
@@ -87,6 +88,7 @@ int main()
 				a[i]=3;
 			}
 		}
+		*/
 		int lis[n];
 		int l_i=0, l_e=0, l_m=0;
 		memset(lis, 0, sizeof(lis));
