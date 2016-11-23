@@ -53,6 +53,15 @@ int sum[MAX];
 ll total;
 int m,n;
 
+
+ll gcd(ll a, ll b) {
+	while (b) {
+		a %= b;
+		swap(a, b);
+	}
+	return a;
+}
+
 void dfs(int v, int parent)
 {
 	if(isSpecial[v]) {
@@ -68,7 +77,7 @@ void dfs(int v, int parent)
 		}
 		dfs(temp.dest, v);
 		sum[v]=sum[v]+sum[temp.dest];
-		total+=2*sum[temp.dest]*(m-sum[temp.dest])*temp.wt;
+		total+=2*(ll)(sum[temp.dest]*(m-sum[temp.dest]))*temp.wt;
 	}
 	//total=total+(2*sum[v]*(m-sum[v]));
 }
@@ -79,7 +88,7 @@ int main()
 	scanf("%d",&t);
 	while(t--) {
 		int v,u,l,sum;
-		sum=0;
+		//sum=0;
 		scanf("%d %d",&n,&m);
 		int a[m];
 		for(i=0;i<=n;i++) {
