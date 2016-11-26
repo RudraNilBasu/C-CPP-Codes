@@ -188,7 +188,17 @@ int main()
 				// check corner case (round)
 				//sweep[h[j].y]=1;
 				// update seg tree value of h[j].y to 1
-				st.update(h[j].y,1);
+				/*
+				if(x_corr==_x1) {
+					if(h[j].y==_y1 || h[j].y==_y2) {}
+				} else if(x_corr==_x2) {
+					if()
+				}
+				*/
+				if((x_corr==_x1||x_corr==_x2)&&(h[j].y==_y1||h[j].y==_y2)) {}
+				else {
+					st.update(h[j].y,1);
+				}
 			}
 		}
 		// query for range _y1 to _y2
@@ -200,9 +210,19 @@ int main()
 		int y_corr=h[i].y;
 		int _x1=h[i].x1;
 		int _x2=h[i].x2;
+		SegmentTree st(100001);
 		for(j=0;j<v.size();j++) {
-			//
+			int _y1=v[j].y1;
+			int _y2=v[j].y2;
+			if(_y1<=y_corr && _y2>=y_corr) {
+				if((_x1==v[j].x||_x2==v[j].x)&&(y_corr==v[j].y1||y_corr==v[j].y2)) {}
+				else {
+					st.update(v[j].x, 1);
+				}
+			}
 		}
+		int x=st.getValue(_x1, _x2);
+		city[h[i].no]=x;
 	}
 	cout<<ans<<endl;
 	for(i=1;i<=n;i++) {
