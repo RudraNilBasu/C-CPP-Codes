@@ -112,13 +112,14 @@ private:
 	}
 	
 	SegmentTreeNode getValue(int stIndex, int left, int right, int lo, int hi) {
+		//printf("Query (%d,%d)\n",lo,hi);
 		if(lazy[stIndex]!=0) {
 			// if not leaf node
-			if(lo!=hi) {
-				int left=2*stIndex;
-				int right=left+1;
-				lazy[left]=(lazy[left]+lazy[stIndex])%3;
-				lazy[right]=(lazy[right]+lazy[stIndex])%3;
+			if(left!=right) {
+				int _left=2*stIndex;
+				int _right=_left+1;
+				lazy[_left]=(lazy[_left]+lazy[stIndex])%3;
+				lazy[_right]=(lazy[_right]+lazy[stIndex])%3;
 			}
 			if(lazy[stIndex]==1) {
 				// shift by one place
@@ -139,17 +140,41 @@ private:
 			}
 			lazy[stIndex]=0;
 		}
+		if(lo>right ||hi<left) {
+			SegmentTreeNode temp;
+			temp.rem0=0;
+			temp.rem1=0;
+			temp.rem2=0;
+			temp.val=0;
+			return temp;
+		}
+		if(lo<=left && hi>=right) {
+			//printf("hue left=%d,right=%d,lo=%d,hi=%d\n",left,right,lo,hi);
+			//printf("index=%d\n",stIndex);
+			return nodes[stIndex];
+		}
+		/*
 		if (left == lo && right == hi)
 			return nodes[stIndex];
 			
+		*/
 		int mid = (left + right) / 2;
+		/*
 		if (lo > mid)
 			return getValue(2*stIndex+1, mid+1, right, lo, hi);
 		if (hi <= mid)
 			return getValue(2*stIndex, left, mid, lo, hi);
 			
+		*/
+		/*
 		SegmentTreeNode leftResult = getValue(2*stIndex, left, mid, lo, mid);
 		SegmentTreeNode rightResult = getValue(2*stIndex+1, mid+1, right, mid+1, hi);
+		SegmentTreeNode result;
+		result.merge(leftResult, rightResult);
+		return result;
+		*/
+		SegmentTreeNode leftResult = getValue(2*stIndex, left, mid, lo, hi);
+		SegmentTreeNode rightResult = getValue(2*stIndex+1, mid+1, right, lo, hi);
 		SegmentTreeNode result;
 		result.merge(leftResult, rightResult);
 		return result;
@@ -232,6 +257,7 @@ int main() {
 		if(op==0) {
 			st.update(x, y, 1);
 		} else {
+			//printf("query (%d,%d)\n",x,y);
 			printf("%d\n",st.getValue(x,y));
 		}
 	}
