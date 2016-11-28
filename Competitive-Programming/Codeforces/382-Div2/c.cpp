@@ -42,6 +42,7 @@ int gcd(int a, int b)
 
 int main()
 {
+	//freopen("inp.txt", "r", stdin);
 	ull n,cnt=0;
 	cin>>n;
 	float ans;
