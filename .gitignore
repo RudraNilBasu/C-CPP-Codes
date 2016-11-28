@@ -38,3 +38,6 @@
 # Input / Output Files
 inp.txt
 out.txt
+
+# swap files
+.*.*.swp

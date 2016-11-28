@@ -43,7 +43,6 @@ int gcd(int a, int b)
 int main()
 {
 	int n,n1,n2,i;
-	float ans=0.0f;
 	scanf("%d %d %d",&n,&n1,&n2);
 	int a[n];
 	for(i=0;i<n;i++) {
@@ -56,27 +55,43 @@ int main()
 		n1=temp;
 	}
 	// take the highest n1 elements
-        int cnt=0,sum=0,pos=-1;
+	
+	float ans,sum1=0,sum2=0;
+	int m=n-1;
+	for(i=0;i<n1;i++) {
+		sum1+=a[m--];
+	}
+	for(i=0;i<n2;i++) {
+		sum2+=a[m--];
+	}
+	ans=((sum1*1.0)/n1)+((sum2*1.0)/n2);
+	printf("%0.8f\n",ans);
+	
+	/*
+        int cnt=0,pos=-1;
+	float sum1=0,sum2=0,ans;
 	for(i=n-1;i>=0;i--) {
 		cnt++;
-		sum+=a[i];
+		sum1+=a[i];
 		if(cnt==n1) {
 			pos=i;
 			break;
 		}
 	}
-	ans=(sum*1.0)/n1;
-	sum=0;
+	//ans=(sum*1.0)/n1;
+	//sum=0;
 	cnt=0;
 	for(i=pos-1;i>=0;i--) {
 		cnt++;
-		sum+=a[i];
+		sum2+=a[i];
 		if(cnt==n2) {
 			break;
 		}
 	}
-	ans+=(sum*1.0)/n2;
+	//ans+=(sum*1.0)/n2;
+	ans=((sum1*1.0)/n1)+((sum2*1.0)/n2);
 	printf("%0.8f\n",ans);
+	*/
 	return 0;
 }
 
