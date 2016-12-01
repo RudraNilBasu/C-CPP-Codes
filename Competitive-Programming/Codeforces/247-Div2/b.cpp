@@ -44,7 +44,40 @@ int gcd(int a, int b)
 int main()
 {
 	int a[5][5];
-	int i,j;
+	int i,j,l,m,k;
+	for(i=0;i<5;i++) {
+		for(j=0;j<5;j++) {
+			scanf("%d",&a[i][j]);
+		}
+	}
+	int ssum=0,smax=0;
+	// produce all PnCs
+	for(i=0;i<5;i++) {
+		for(j=0;j<5;j++) {
+			if(j==i)
+				continue;
+			for(k=0;k<5;k++) {
+				if(k==i||k==j)
+					continue;
+				for(l=0;l<5;l++) {
+					if(l==i||l==j||l==k)
+						continue;
+					for(m=0;m<5;m++) {
+						if(m==i||m==j||m==k||m==l)
+							continue;
+						ssum=a[j][k]+a[k][j]+a[j][i]+a[i][j];
+						ssum+=2*(a[k][l]+a[l][k]+a[l][m]+a[m][l]);
+						if(ssum>smax) {
+							smax=ssum;
+						}
+					}
+				}
+			}
+		}
+	}
+	cout<<smax<<endl;
+	// waste
+	/*
 	for(i=0;i<5;i++) {
 		for(j=0;j<5;j++) {
 			scanf("%d",&a[i][j]);
@@ -82,20 +115,6 @@ int main()
 	cout<<ans<<endl;
 	for(i=0;i<5;i++) {
 		for(j=0;j<5;j++) {
-			/*
-			if(i==mi && j==mj) {
-				continue;
-			}
-			if(i==mj && j==mi) {
-				continue;
-			}
-			if(i==smi && j==smj) {
-				continue;
-			}
-			if(i==smj && j==smi) {
-				continue;
-			}
-			*/
 			if(i==smi||i==mi||i==smj||i==mj)
 				continue;
 			if(j==smi||j==smj||j==mi||j==mj)
@@ -105,6 +124,7 @@ int main()
 		}
 	}
 	cout<<ans<<endl;
+	*/
 	return 0;
 }
 
