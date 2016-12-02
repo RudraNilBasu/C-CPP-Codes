@@ -41,69 +41,67 @@ int gcd(int a, int b)
 	return gcd(b,a%b);
 }
 
-typedef struct node {
-	int l;
-	int r;
-}node;
+int c[200001];
+int hash[200001];
+bool traversed[200001];
+int mx=-1,num=0;
 
-int n,m,k;
-//int c[200001];
-
-int calc(int c[], int index, node qr[])
+int dfs(int n, vector<int> *g, int parent)
 {
-	if(index==m)
-		return 0;
-	int l,r,i;
-	l=qr[index].l;
-	r=qr[index].r;
-	if(c[l-1]==c[r-1]) {
-		return calc(c, index+1, qr);
-	} else {
-		
-		int t[n];
-		for(i=0;i<n;i++) {
-			t[i]=c[i];
-		}
-		t[l-1]=t[r-1];
-		int x=1+calc(t,index+1, qr);
-		t[l-1]=c[l-1];
-		t[r-1]=c[l-1];
-		int y=1+calc(t,index+1, qr);
-		return min(x,y);
-		
-		/*
-		int x_l,x_r;
-		x_l=c[l-1];
-		x_r=c[r-1];
-		c[l-1]=c[r-1];
-		int x=1+calc(c,index+1,qr);
-		c[l-1]=x_l;
-		c[r-1]=c[l-1];
-		int y=1+calc(c,index+1,qr);
-		return min(x,y);
-		*/
+	//cout<<"At node: "<<n<<" Color: "<<c[n]<<endl;
+	hash[c[n]]++;
+	if(hash[ c[n] ]>mx) {
+		mx=hash[ c[n] ];
 	}
+	int i;
+	for(i=0;i<g[n].size();i++) {
+		if(g[n][i]==parent) {
+			continue;
+		}
+		if(!traversed[ g[n][i] ]) {
+			num++;
+			traversed[ g[n][i] ]=true;
+			dfs( g[n][i], g, n );
+		}
+	}
+	return 0;
 }
 
 int main()
 {
-	//int n,m,k;
-	cin>>n>>m>>k;
-	int c[n];
-	int hash[n+1];
-	memset(hash, 0, sizeof(hash));
+	int n,m,k;
+	//cin>>n>>m>>k;
+	scanf("%d %d %d",&n,&m,&k);
+	//int c[n];
 	int i;
-	for(i=0;i<n;i++) {
-		cin>>c[i];
+	for(i=1;i<=n;i++) {
+		scanf("%d",c+i);
+		//cin>>c[i];
 	}
-	node qr[m];
+	vector<int> g[n+1];
+	//bool traversed[n+1];
+	memset(traversed, false, sizeof(traversed));
 	int l,r;
 	for(i=0;i<m;i++) {
-		cin>>l>>r;
-		qr[i].l=l;
-		qr[i].r=r;
+		scanf("%d %d",&l,&r);
+		//cin>>l>>r;
+		g[l].push_back(r);
+		g[r].push_back(l);
 	}
-	cout<<calc(c,0,qr)<<endl;
+	int ans=0;
+	for(i=1;i<=n;i++) {
+		if(!traversed[i] && g[i].size()>0) {
+			memset(hash, 0, sizeof(hash));
+			mx=-1;
+			num=1;
+			traversed[i]=true;
+			dfs(i,g, -1);
+			//cout<<num<<' '<<mx<<endl;
+			ans+=(num-mx);
+		}
+	}
+	printf("%d\n",ans);
+	//cout<<ans<<endl;
 	return 0;
 }
 
