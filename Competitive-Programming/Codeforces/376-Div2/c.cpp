@@ -46,13 +46,23 @@ int hash[200001];
 bool traversed[200001];
 int mx=-1,num=0;
 
-int dfs(int n, vector<int> *g, int parent)
+vector<int> g[200001];
+
+map<int,int> sd;
+
+int dfs(int n, int parent)
 {
 	//cout<<"At node: "<<n<<" Color: "<<c[n]<<endl;
-	hash[c[n]]++;
+	//hash[c[n]]++;
+	sd[ c[n] ]++;
+	if(sd[ c[n] ]>mx) {
+		mx=sd[ c[n] ];
+	}
+	/*
 	if(hash[ c[n] ]>mx) {
 		mx=hash[ c[n] ];
 	}
+	*/
 	int i;
 	for(i=0;i<g[n].size();i++) {
 		if(g[n][i]==parent) {
@@ -61,11 +71,16 @@ int dfs(int n, vector<int> *g, int parent)
 		if(!traversed[ g[n][i] ]) {
 			num++;
 			traversed[ g[n][i] ]=true;
-			dfs( g[n][i], g, n );
+			dfs( g[n][i], n );
 		}
 	}
 	return 0;
 }
+
+/*
+ * map<> = AC
+ * Array + memset() = TLE
+ * */
 
 int main()
 {
@@ -78,7 +93,7 @@ int main()
 		scanf("%d",c+i);
 		//cin>>c[i];
 	}
-	vector<int> g[n+1];
+	//vector<int> g[n+1];
 	//bool traversed[n+1];
 	memset(traversed, false, sizeof(traversed));
 	int l,r;
@@ -91,13 +106,14 @@ int main()
 	int ans=0;
 	for(i=1;i<=n;i++) {
 		if(!traversed[i] && g[i].size()>0) {
-			memset(hash, 0, sizeof(hash));
+			//memset(hash, 0, sizeof(hash));
 			mx=-1;
 			num=1;
 			traversed[i]=true;
-			dfs(i,g, -1);
+			dfs(i,-1);
 			//cout<<num<<' '<<mx<<endl;
 			ans+=(num-mx);
+			sd.clear();
 		}
 	}
 	printf("%d\n",ans);
