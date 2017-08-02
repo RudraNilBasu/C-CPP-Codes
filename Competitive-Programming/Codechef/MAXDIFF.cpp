@@ -30,15 +30,6 @@ int main()
                         scanf("%lld",(w+i));
                 }
                 sort(w, w+n);
-                /*
-                ll sum1 = 0, sum2 = 0, diff;
-                for(i = 0;i < k;i++) {
-                        sum1 += w[i];
-                }
-                for(i = k;i < n;i++) {
-                        sum2 += w[i];
-                }
-                */
                 ll diff1 = calc_diff(w, n, k);
                 reverse(w, w+n);
                 ll diff2 = calc_diff(w, n, k);
