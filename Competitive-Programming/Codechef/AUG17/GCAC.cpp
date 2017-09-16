@@ -11,7 +11,7 @@ class CompanyInfo;
 class StudentInfo
 {
         public:
-                ll minExpectedSalary;
+                ll minSalary;
                 vector<CompanyInfo> companiesSelected;
 
                 bool hired;
@@ -26,7 +26,7 @@ class StudentInfo
 
                 void setMinSalary(int _minSalary)
                 {
-                        minExpectedSalary = _minSalary;
+                        minSalary = _minSalary;
                 }
 };
 
@@ -37,7 +37,6 @@ class CompanyInfo
                 ll offeredSalary;
                 ll maxJobOffers;
                 int noOfStudents;
-                vector<int> studentsIncoming;
 
                 CompanyInfo()
                 {
@@ -90,6 +89,7 @@ int main()
                         companyInfo[i].setValues(i, offeredSalary, maxJobOffers);
                 }
 
+
                 int status;
                 for (i = 0; i < n; i++) {
                         char st[m + 1];
@@ -101,12 +101,43 @@ int main()
                         }
                 }
 
+                /*
+                printf("Testing sort:\n");
+                for (i = 0; i < n; i++ )
+                        for (j = 0; j < studentInfo[i].companiesSelected.size(); j++)
+                                printf("%lld ", studentInfo[i].companiesSelected[j].offeredSalary);
+                printf("\n");
+                */
+
+                for (i = 0; i < n; i++)
+                        sort(studentInfo[i].companiesSelected.begin(), studentInfo[i].companiesSelected.end(), compareCompanies);
+
+                for (i = 0; i < n; i++) {
+                        printf("-----\n");
+                        vector<CompanyInfo>::iterator it = studentInfo[i].companiesSelected.begin();
+                        int cnt = 0;
+                        while (it != studentInfo[i].companiesSelected.end() ) {
+                                printf("%lld ", it->offeredSalary);
+                                cnt++;
+                                ++it;
+                        }
+                        printf("\n%d\n", cnt);
+                        printf("-----\n");
+                }
+                /*
+                printf("After sort:\n");
+                for (i = 0; i < n; i++ )
+                        for (j = 0; j < studentInfo[i].companiesSelected.size(); j++)
+                                printf("%lld ", studentInfo[i].companiesSelected[j].offeredSalary);
+                printf("\n");
+                */
+
                 for (i = 0; i < n; i++) {
                         StudentInfo student = studentInfo[i];
                         for (j = 0; j < student.companiesSelected.size(); j++) {
                                 CompanyInfo company = student.companiesSelected[j];
                                 int cmpIndex = company.index;
-                                if (student.minExpectedSalary > company.offeredSalary)
+                                if (student.minSalary > company.offeredSalary)
                                         break;
                                 if (companyInfo[cmpIndex].isFull())
                                         break;
