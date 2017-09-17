@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <vector>
 #include <algorithm>
+#include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -90,6 +92,39 @@ int main()
                 }
 
 
+                string s[n];
+                for (i = 0; i < n; i++) {
+                        cin >> s[i];
+                }
+
+                int jobbed = 0;
+                ll totalSalary = 0;
+                for (i = 0; i < n; i++) {
+                        ll minSalary = studentInfo[i].minSalary;
+                        ll maxSalaryOffered = -1;
+                        int selectedCompanyIndex = -1;
+                        for (j = 0; j < m; j++) {
+                                if (s[i][j] == '1') {
+                                        if (maxSalaryOffered < companyInfo[j].offeredSalary && !companyInfo[j].isFull()) {
+                                                maxSalaryOffered = companyInfo[j].offeredSalary;
+                                                selectedCompanyIndex = j;
+                                        }
+                                }
+                        }
+                        if (minSalary <= maxSalaryOffered) {
+                                companyInfo[selectedCompanyIndex].takeOne();
+                                studentInfo[i].hired = true;
+                                jobbed++;
+                                totalSalary += maxSalaryOffered;
+                        }
+                }
+                int neijob = 0;
+                for (i = 0; i < m; i++) {
+                        if (companyInfo[i].noOfStudents == 0)
+                                neijob++;
+                }
+                printf("%d %lld %d\n", jobbed, totalSalary, neijob);
+                /*
                 int status;
                 for (i = 0; i < n; i++) {
                         char st[m + 1];
@@ -101,46 +136,27 @@ int main()
                         }
                 }
 
-                /*
-                printf("Testing sort:\n");
-                for (i = 0; i < n; i++ )
-                        for (j = 0; j < studentInfo[i].companiesSelected.size(); j++)
-                                printf("%lld ", studentInfo[i].companiesSelected[j].offeredSalary);
-                printf("\n");
-                */
+                
+                
 
                 for (i = 0; i < n; i++)
                         sort(studentInfo[i].companiesSelected.begin(), studentInfo[i].companiesSelected.end(), compareCompanies);
 
                 for (i = 0; i < n; i++) {
-                        printf("-----\n");
-                        vector<CompanyInfo>::iterator it = studentInfo[i].companiesSelected.begin();
-                        int cnt = 0;
-                        while (it != studentInfo[i].companiesSelected.end() ) {
-                                printf("%lld ", it->offeredSalary);
-                                cnt++;
-                                ++it;
+                        for (j = 0; j < m; j++) {
+                                printf("%c ", st[i]);
                         }
-                        printf("\n%d\n", cnt);
-                        printf("-----\n");
                 }
-                /*
-                printf("After sort:\n");
-                for (i = 0; i < n; i++ )
-                        for (j = 0; j < studentInfo[i].companiesSelected.size(); j++)
-                                printf("%lld ", studentInfo[i].companiesSelected[j].offeredSalary);
-                printf("\n");
-                */
-
+                
                 for (i = 0; i < n; i++) {
                         StudentInfo student = studentInfo[i];
                         for (j = 0; j < student.companiesSelected.size(); j++) {
                                 CompanyInfo company = student.companiesSelected[j];
                                 int cmpIndex = company.index;
                                 if (student.minSalary > company.offeredSalary)
-                                        break;
+                                        continue;
                                 if (companyInfo[cmpIndex].isFull())
-                                        break;
+                                        continue;
                                 studentInfo[i].hired = true;
                                 studentInfo[i].money = company.offeredSalary;
                                 companyInfo[cmpIndex].takeOne();
@@ -162,27 +178,6 @@ int main()
                                 noSelect++;
                 }
                 printf("%d %lld %d\n", job, totSalary, noSelect);
-                /*
-                for (i = 0; i < n; i++) {
-                        StudentInfo student = studentInfo[i];
-                        printf("Student: %d\n", i);
-                        if (student.hired) {
-                                printf("Salary: %lld\n", student.money);
-                        } else {
-                                printf("NOT HIRED\n");
-                        }
-                }
-                */
-                /*
-                for (i = 0; i < n; i++) {
-                        sort(studentInfo[i].companiesSelected.begin(), studentInfo[i].companiesSelected.end(), compareCompanies);
-                        printf("Best options for student %d (%lld)\n", (i + 1), studentInfo[i].minExpectedSalary);
-                        printf("Size: %d\n", studentInfo[i].companiesSelected.size());
-                        for (j = 0; j < studentInfo[i].companiesSelected.size(); j++) {
-                                printf("%lld ", studentInfo[i].companiesSelected[j].offeredSalary);
-                        }
-                        printf("\n");
-                }
                 */
         }
         return 0;
