@@ -3,6 +3,7 @@
 #include <queue>
 #include <algorithm>
 #include <map>
+#include <iostream>
 
 using namespace std;
 
@@ -35,8 +36,13 @@ int main()
         queue<int> q;
         q.push(1);
 
+        long long int nodeCount[2];
+        nodeCount[0] = 0;
+        nodeCount[1] = 0;
+
         while (!q.empty()) {
                 int node = q.front();
+                nodeCount[ colors[node]]++;
                 q.pop();
                 for (i = 0; i < g[node].size(); i++) {
                         if ( colors[ g[node][i] ] == -1 ) {
@@ -46,22 +52,6 @@ int main()
                 }
         }
 
-        int count = 0;
-        for (i = 1; i <= n; i++) {
-                if (colors[i] == 0)
-                        continue;
-                for (j = 1; j <= n; j++) {
-                        if (j == i)
-                                continue;
-                        if (colors[i] == colors[j])
-                                continue;
-                        if ( find(g[i].begin(), g[i].end(), j) != g[i].end() )
-                                continue;
-                        count++;
-                        //g[i].push_back(j);
-                        //printf("%d (%d) %d (%d)\n", i, colors[i], j, colors[j]);
-                }
-        }
-        //count /= 2;
-        printf("%d\n", count);
+        long long int count = (nodeCount[0] * nodeCount[1]) - (n - 1);
+        cout << count << endl;
 }
