@@ -13,7 +13,7 @@ int convert(std::string number, int base)
 
         for (i = len - 1; i >= 0; i-- ) {
                 int n = getNum(number[i]);
-                if (n >= base) return -1;
+                if (n == -1 || n >= base) return -1;
 
                 int exp = len - 1 - i;
                 value += n * pow(base, exp);
@@ -34,7 +34,11 @@ bool compareBinToHex(std::string binary, std::string hex)
 
 int getNum(char ch)
 {
-        return 1;
+        if (ch >= '0' && ch <= '9')
+                return ch - '0';
+        if (ch >= 'A' && ch <= 'F')
+                return 10 + (ch - 'A');
+        return -1;
 }
 
 int main()
