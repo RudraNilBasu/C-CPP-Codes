@@ -39,21 +39,13 @@ bool checkPalindromePermutation(std::string str)
 bool checkPalindromePermutation2(std::string str)
 {
         int i, bit = 0;
-        int spaces = 0, alphabets;
         for (i = 0; i < str.length(); i++) {
-                if (str[i] == ' ')
-                        spaces++;
                 char ch = toLowerCase(str[i]);
                 if (ch < 'a' || ch > 'z')
                         continue;
                 bit = bit ^ (1 << ((ch - 'a') + 1));
         }
-        alphabets = str.length() - spaces;
-        if (alphabets % 2 == 0) {
-                return (bit == 0);
-        } else {
-                return (bit & (bit - 1)) == 0 ? true : false;
-        }
+        return (bit == 0) || (bit & (bit - 1)) == 0 ? true : false;
 }
 
 int main()
