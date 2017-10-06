@@ -75,10 +75,37 @@ class LinkedList
         }
 
         public void insertAtPos(int val, int pos)
-        {}
+        {
+                if (pos > getSize()) {
+                        System.out.println("OutOfBounds");
+                        return;
+                }
+
+                int currentPos = 0;
+                Node n = start;
+                while (currentPos != pos - 1) {
+                        n = n.next;
+                        currentPos++;
+                }
+                Node newNode = new Node(val, n.next);
+                n.next = newNode;
+        }
 
         public void deleteAtPos(int pos)
-        {}
+        {
+                if (pos > getSize()) {
+                        System.out.println("OutOfBounds");
+                        return;
+                }
+
+                int currentPos = 0;
+                Node n = start;
+                while (currentPos != pos - 1) {
+                        n = n.next;
+                        currentPos++;
+                }
+                n.next = n.next.next;
+        }
 
         public void display()
         {
@@ -92,5 +119,13 @@ class LinkedList
                         System.out.print(n.data + " ");
                 }
                 System.out.println();
+        }
+}
+
+class SinglyLinkedList
+{
+        public static void main(String args[])
+        {
+                Scanner sc = new Scanner();
         }
 }

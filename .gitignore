@@ -41,3 +41,5 @@ out.txt
 
 # swap files
 .*.*.swp
+
+*.class
