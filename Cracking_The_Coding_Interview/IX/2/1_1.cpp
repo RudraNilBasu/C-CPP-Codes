@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <map>
 
 class Node {
         public:
@@ -62,6 +63,46 @@ class LinkedList
                 }
                 printf("\n");
         }
+
+        void delete_from_index(int n)
+        {
+                // remove the nth element
+                if (n == 1) {
+                        head = head->next;
+                        return ;
+                }
+                int cnt = 0;
+                Node *i = head;
+                while (i != NULL) {
+                        cnt++;
+                        if (cnt + 1 == n) {
+                                if (i->next == NULL)
+                                        return;
+                                i->next = i->next->next;
+                                return;
+                        }
+                        i = i->next;
+                }
+        }
+
+        void remove_duplicates()
+        {
+                std::map<int, bool> occ;
+                Node* i = head;
+
+                int index = 0;
+                while (i != NULL) {
+                        index++;
+                        if (!occ[i->data]) {
+                                occ[i->data] = true;
+                        } else {
+                                printf("EXTRA: %d\n", i->data);
+                                delete_from_index(index);
+                                index--;
+                        }
+                        i = i->next;
+                }
+        }
 };
 
 int main()
@@ -69,11 +110,15 @@ int main()
         LinkedList list;
 
         list.add_element_end(5);
-        list.add_element_end(101);
+        list.add_element_end(5);
         list.add_element_end(15);
         list.add_element_end(5);
+        list.add_element_end(15);
 
         list.display_list();
 
+        list.remove_duplicates();
+
+        list.display_list();
         return 0;
 }
