@@ -103,6 +103,28 @@ class LinkedList
                         i = i->next;
                 }
         }
+
+        void remove_duplicates_iteration()
+        {
+                Node* i = head;
+                Node* j;
+
+                int curr_index = 0;
+                int next_index;
+
+                while(i != NULL) {
+                        j = i;
+                        while (j->next != NULL) {
+                                if (j->next->data == i->data) {
+                                        j->next = j->next->next;
+                                }
+                                j = j->next;
+                                if (j == NULL)
+                                        break;
+                        }
+                        i = i->next;
+                }
+        }
 };
 
 int main()
@@ -117,7 +139,7 @@ int main()
 
         list.display_list();
 
-        list.remove_duplicates();
+        list.remove_duplicates_iteration();
 
         list.display_list();
         return 0;
