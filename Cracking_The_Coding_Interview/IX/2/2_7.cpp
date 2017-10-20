@@ -121,29 +121,52 @@ class LinkedList
         }
 };
 
-Node* get_collision_point(Node* node)
-{
-        Node *faster, *slower;
-        faster = node->next->next;
-        slower = node->next;
+#include <map>
 
-        while (faster != slower) {
-                slower = slower->next;
-                faster = faster->next->next;
+void find_intersection(Node* n1, Node* n2)
+{
+        std::map<Node*, bool> mp;
+
+        while (n1 != NULL) {
+                mp[n1] = true;
+                n1 = n1->next;
         }
-        printf("Collided at: %d\n", faster->data);
-        return faster;
+
+        while (n2 != NULL) {
+                if (mp[n2]) {
+                        printf("Intersection point: %d\n", n2->data);
+                        return ;
+                }
+                n2 = n2->next;
+        }
 }
 
-Node* get_loop_start(LinkedList l1)
+void find_intersection_new(LinkedList l1, LinkedList l2)
 {
-        Node* collision_point = get_collision_point(l1.head);
-        Node* start = l1.head;
-        while (start != collision_point) {
-                start = start->next;
-                collision_point = collision_point->next;
+        int len_1 = l1.get_length();
+        int len_2 = l2.get_length();
+
+        int diff = 0;
+
+        Node *l1_head = l1.head, *l2_head = l2.head;
+        if (len_1 > len_2) {
+                diff = len_1 - len_2;
+                l1_head = l1.get_node_from_index(diff + 1);
+        } else if (len_2 > len_1) {
+                diff = len_2 - len_1;
+                l2_head = l2.get_node_from_index(diff + 1);
         }
-        return collision_point;
+
+        while (l1_head != NULL) {
+                if (l1_head == l2_head) {
+                        printf("Intersection point found at: %d\n", l1_head->data);
+                        return;
+                }
+                l1_head = l1_head->next;
+                l2_head = l2_head->next;
+        }
+        printf("No Intersection point found\n");
+        return;
 }
 
 int main()
@@ -155,7 +178,9 @@ int main()
         num_1.add_element_end(4);
         num_1.add_element_end(5);
 
-        Node* i = num_1.head;
+        LinkedList num_2;
+        num_2.add_element_end(10);
+        Node* i = num_2.head;
         while (i->next != NULL) {
                 i = i->next;
         }
@@ -163,7 +188,11 @@ int main()
         Node* temp = num_1.get_node_from_index(3);
         i->next = temp;
 
-        Node* loop_start = get_loop_start(num_1);
-        printf("Loop starts at: %d\n", loop_start->data);
+        num_1.display_list();
+        num_2.display_list();
+
+        find_intersection(num_1.head, num_2.head);
+
+        find_intersection_new(num_1, num_2);
         return 0;
 }
