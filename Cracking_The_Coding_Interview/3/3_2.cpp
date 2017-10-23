@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <limits.h>
 
-class Node {
+class Node
+{
         public:
         int data;
         Node* next;
@@ -57,8 +58,64 @@ class Stack
                 }
 };
 
+class MinStack : public Stack
+{
+        public:
+                Stack *min_st;
+
+                MinStack();
+                void push(int);
+                int pop();
+                int min();
+};
+
+MinStack::MinStack() : Stack()
+{
+        min_st = new Stack;
+        min_st->push(INT_MAX);
+}
+
+void MinStack::push(int data)
+{
+        if (data < min_st->peek()) {
+                min_st->push(data);
+        }
+
+        Stack::push(data);
+}
+
+int MinStack::pop()
+{
+        int data = Stack::pop();
+        if (data == min_st->peek()) {
+                min_st->pop();
+        }
+        return data;
+}
+
+int MinStack::min()
+{
+        return min_st->peek();
+}
+
 int main()
 {
-        Stack *st = new Stack();
+        MinStack *st = new MinStack;
+        int ch, data;
+        while (1) {
+                scanf("%d", &ch);
+                if (ch == 1) {
+                        scanf("%d", &data);
+                        st->push(data);
+                } else if (ch == 2) {
+                        st->pop();
+                } else if (ch == 3) {
+                        printf("Head: %d\n", st->peek());
+                } else if (ch == 4) {
+                        printf("Min: %d\n", st->min());
+                } else if (ch == 5) {
+                        break;
+                }
+        }
         return 0;
 }
