@@ -35,15 +35,15 @@ class Stack
                         size++;
                 }
 
-                T pop()
+                void pop()
                 {
                         if (head == NULL)
-                                return -1;
+                                return ;
 
                         T data = head->data;
                         head = head->next;
                         size--;
-                        return data;
+                        return;// data;
                 }
 
                 bool isEmpty()
@@ -71,8 +71,9 @@ class SetOfStacks
         public:
                 SetOfStacks();
                 void push(int data);
-                int pop();
+                void pop();
                 int getSize();
+                int peek();
 };
 
 SetOfStacks::SetOfStacks()
@@ -83,32 +84,39 @@ SetOfStacks::SetOfStacks()
 void SetOfStacks::push(int data)
 {
         if (stack_set->head == NULL) {
+                printf("No Stack available, creating a new one\n");
                 Stack<int>* st = new Stack<int>;
                 stack_set->push(*st);
-        } else if (stack_set->head->getSize() >= MAX_PLATES) {
+        } else if (stack_set->head->data.getSize() >= MAX_PLATES) {
+                printf("Previous stack is full, creating a new one\n");
                 Stack<int>* st = new Stack<int>;
                 stack_set->push(*st);
         }
-        stack_set->head->push(data);
-        size++;
+        stack_set->head->data.push(data);
 }
 
 void SetOfStacks::pop()
 {
-        stack_set->head->pop();
-        if (stack_set->head->getSize() == 0)
+        if (stack_set->head == NULL) return;
+        stack_set->head->data.pop();
+        if (stack_set->head->data.getSize() == 0)
                 stack_set->pop();
 }
 
-int getSize()
+int SetOfStacks::getSize()
 {
         return stack_set->getSize();
 }
 
+int SetOfStacks::peek()
+{
+        if (stack_set->head == NULL) return -1;
+        return stack_set->head->data.peek();
+}
+
 int main()
 {
-        int max_size_per_plate = 5;
-        Stack<int> *st = new Stack<int>();
+        SetOfStacks* st = new SetOfStacks;
         int ch, data;
         while (1) {
                 scanf("%d", &ch);
@@ -117,8 +125,9 @@ int main()
                         st->push(data);
                 }
                 if (ch == 2) {
-                        printf("Popped: %d\n", st->pop());
-                        printf("Current top: %d\n", st->peek());
+                        st->pop();
+                        printf("Popped\n");
+                        //printf("Current top: %d\n", st->peek());
                 }
                 if (ch == 3)
                         printf("Current top: %d\n", st->peek());
