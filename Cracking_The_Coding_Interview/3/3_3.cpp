@@ -74,6 +74,7 @@ class SetOfStacks
                 void pop();
                 int getSize();
                 int peek();
+                void popAt(int);
 };
 
 SetOfStacks::SetOfStacks()
@@ -112,6 +113,20 @@ int SetOfStacks::peek()
 {
         if (stack_set->head == NULL) return -1;
         return stack_set->head->data.peek();
+}
+
+void SetOfStacks::popAt(int _index)
+{
+        Node< Stack<int> >* st = stack_set->head;
+        int index = 0;
+        while (st != NULL) {
+                index++;
+                if (index == _index) {
+                        st->data.pop();
+                        break;
+                }
+                st = st->next;
+        }
 }
 
 int main()
