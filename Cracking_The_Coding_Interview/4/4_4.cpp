@@ -16,8 +16,11 @@ class Node
 
 int calc_height(Node* root)
 {
+        if (root == NULL) return -1;
+
         int left_subtree_height, right_subtree_height;
 
+        /*
         if (root->left_subtree == NULL)
                 left_subtree_height = 0;
         else
@@ -26,6 +29,10 @@ int calc_height(Node* root)
                 right_subtree_height = 0;
         else
                 right_subtree_height = calc_height(root->right_subtree);
+
+        */
+        left_subtree_height = 1 + calc_height(root->left_subtree);
+        right_subtree_height = 1 + calc_height(root->right_height);
 
         if (abs(left_subtree_height - right_subtree_height) <= 1)
                 root->balanced = true;
