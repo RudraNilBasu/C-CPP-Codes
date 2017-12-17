@@ -10,7 +10,7 @@ typedef struct coor {
 
 bool checkLeft(coor coord)
 {
-        if (coord.y < 0)
+        if (coord.x < 0)
                 return true;
         return false;
 }
